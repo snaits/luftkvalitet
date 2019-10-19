@@ -6,7 +6,7 @@ import os.path
 from pathlib import Path
 from dateutil.relativedelta import relativedelta
 
-dirPath = Path('output')
+dirPath = Path('obs')
 dateFormat = "%Y-%m-%d"
 
 currentDate = datetime.datetime.now()
