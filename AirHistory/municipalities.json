@@ -1,0 +1,2240 @@
+{
+  "countyList": [
+    {
+      
+      "name": "Akershus",
+      "countyCode": "02",
+      "municipalityList": [
+        {
+          
+          "name": "Vestby",
+          "municipalityNumber": "0211"
+        },
+        {
+          
+          "name": "Ski",
+          "municipalityNumber": "0213"
+        },
+        {
+          
+          "name": "Ås",
+          "municipalityNumber": "0214"
+        },
+        {
+          
+          "name": "Frogn",
+          "municipalityNumber": "0215"
+        },
+        {
+          
+          "name": "Nesodden",
+          "municipalityNumber": "0216"
+        },
+        {
+          
+          "name": "Oppegård",
+          "municipalityNumber": "0217"
+        },
+        {
+          
+          "name": "Bærum",
+          "municipalityNumber": "0219"
+        },
+        {
+          
+          "name": "Asker",
+          "municipalityNumber": "0220"
+        },
+        {
+          
+          "name": "Aurskog-Høland",
+          "municipalityNumber": "0221"
+        },
+        {
+          
+          "name": "Sørum",
+          "municipalityNumber": "0226"
+        },
+        {
+          
+          "name": "Fet",
+          "municipalityNumber": "0227"
+        },
+        {
+          
+          "name": "Rælingen",
+          "municipalityNumber": "0228"
+        },
+        {
+          
+          "name": "Enebakk",
+          "municipalityNumber": "0229"
+        },
+        {
+          
+          "name": "Lørenskog",
+          "municipalityNumber": "0230"
+        },
+        {
+          
+          "name": "Skedsmo",
+          "municipalityNumber": "0231"
+        },
+        {
+          
+          "name": "Nittedal",
+          "municipalityNumber": "0233"
+        },
+        {
+          
+          "name": "Gjerdrum",
+          "municipalityNumber": "0234"
+        },
+        {
+          
+          "name": "Ullensaker",
+          "municipalityNumber": "0235"
+        },
+        {
+          
+          "name": "Nes i Akershus",
+          "municipalityNumber": "0236"
+        },
+        {
+          
+          "name": "Eidsvoll",
+          "municipalityNumber": "0237"
+        },
+        {
+          
+          "name": "Nannestad",
+          "municipalityNumber": "0238"
+        },
+        {
+          
+          "name": "Hurdal",
+          "municipalityNumber": "0239"
+        }
+      ]
+    },
+    {
+      
+      "name": "Aust-Agder",
+      "countyCode": "09",
+      "municipalityList": [
+        {
+          
+          "name": "Risør",
+          "municipalityNumber": "0901"
+        },
+        {
+          
+          "name": "Grimstad",
+          "municipalityNumber": "0904"
+        },
+        {
+          
+          "name": "Arendal",
+          "municipalityNumber": "0906"
+        },
+        {
+          
+          "name": "Gjerstad",
+          "municipalityNumber": "0911"
+        },
+        {
+          
+          "name": "Vegårshei",
+          "municipalityNumber": "0912"
+        },
+        {
+          
+          "name": "Tvedestrand",
+          "municipalityNumber": "0914"
+        },
+        {
+          
+          "name": "Froland",
+          "municipalityNumber": "0919"
+        },
+        {
+          
+          "name": "Lillesand",
+          "municipalityNumber": "0926"
+        },
+        {
+          
+          "name": "Birkenes",
+          "municipalityNumber": "0928"
+        },
+        {
+          
+          "name": "Åmli",
+          "municipalityNumber": "0929"
+        },
+        {
+          
+          "name": "Iveland",
+          "municipalityNumber": "0935"
+        },
+        {
+          
+          "name": "Evje og Hornnes",
+          "municipalityNumber": "0937"
+        },
+        {
+          
+          "name": "Bygland",
+          "municipalityNumber": "0938"
+        },
+        {
+          
+          "name": "Valle",
+          "municipalityNumber": "0940"
+        },
+        {
+          
+          "name": "Bykle",
+          "municipalityNumber": "0941"
+        }
+      ]
+    },
+    {
+      
+      "name": "Buskerud",
+      "countyCode": "06",
+      "municipalityList": [
+        {
+          
+          "name": "Drammen",
+          "municipalityNumber": "0602"
+        },
+        {
+          
+          "name": "Kongsberg",
+          "municipalityNumber": "0604"
+        },
+        {
+          
+          "name": "Ringerike",
+          "municipalityNumber": "0605"
+        },
+        {
+          
+          "name": "Hole",
+          "municipalityNumber": "0612"
+        },
+        {
+          
+          "name": "Flå",
+          "municipalityNumber": "0615"
+        },
+        {
+          
+          "name": "Nes i Buskerud",
+          "municipalityNumber": "0616"
+        },
+        {
+          
+          "name": "Gol",
+          "municipalityNumber": "0617"
+        },
+        {
+          
+          "name": "Hemsedal",
+          "municipalityNumber": "0618"
+        },
+        {
+          
+          "name": "Ål",
+          "municipalityNumber": "0619"
+        },
+        {
+          
+          "name": "Hol",
+          "municipalityNumber": "0620"
+        },
+        {
+          
+          "name": "Sigdal",
+          "municipalityNumber": "0621"
+        },
+        {
+          
+          "name": "Krødsherad",
+          "municipalityNumber": "0622"
+        },
+        {
+          
+          "name": "Modum",
+          "municipalityNumber": "0623"
+        },
+        {
+          
+          "name": "Øvre Eiker",
+          "municipalityNumber": "0624"
+        },
+        {
+          
+          "name": "Nedre Eiker",
+          "municipalityNumber": "0625"
+        },
+        {
+          
+          "name": "Lier",
+          "municipalityNumber": "0626"
+        },
+        {
+          
+          "name": "Røyken",
+          "municipalityNumber": "0627"
+        },
+        {
+          
+          "name": "Hurum",
+          "municipalityNumber": "0628"
+        },
+        {
+          
+          "name": "Flesberg",
+          "municipalityNumber": "0631"
+        },
+        {
+          
+          "name": "Rollag",
+          "municipalityNumber": "0632"
+        },
+        {
+          
+          "name": "Nore og Uvdal",
+          "municipalityNumber": "0633"
+        }
+      ]
+    },
+    {
+      
+      "name": "Finnmark",
+      "countyCode": "20",
+      "municipalityList": [
+        {
+          
+          "name": "Vardø",
+          "municipalityNumber": "2002"
+        },
+        {
+          
+          "name": "Vadsø",
+          "municipalityNumber": "2003"
+        },
+        {
+          
+          "name": "Hammerfest",
+          "municipalityNumber": "2004"
+        },
+        {
+          
+          "name": "Kautokeino",
+          "municipalityNumber": "2011"
+        },
+        {
+          
+          "name": "Alta",
+          "municipalityNumber": "2012"
+        },
+        {
+          
+          "name": "Loppa",
+          "municipalityNumber": "2014"
+        },
+        {
+          
+          "name": "Hasvik",
+          "municipalityNumber": "2015"
+        },
+        {
+          
+          "name": "Kvalsund",
+          "municipalityNumber": "2017"
+        },
+        {
+          
+          "name": "Måsøy",
+          "municipalityNumber": "2018"
+        },
+        {
+          
+          "name": "Nordkapp",
+          "municipalityNumber": "2019"
+        },
+        {
+          
+          "name": "Porsanger",
+          "municipalityNumber": "2020"
+        },
+        {
+          
+          "name": "Karasjok",
+          "municipalityNumber": "2021"
+        },
+        {
+          
+          "name": "Lebesby",
+          "municipalityNumber": "2022"
+        },
+        {
+          
+          "name": "Gamvik",
+          "municipalityNumber": "2023"
+        },
+        {
+          
+          "name": "Berlevåg",
+          "municipalityNumber": "2024"
+        },
+        {
+          
+          "name": "Tana",
+          "municipalityNumber": "2025"
+        },
+        {
+          
+          "name": "Nesseby",
+          "municipalityNumber": "2027"
+        },
+        {
+          
+          "name": "Båtsfjord",
+          "municipalityNumber": "2028"
+        },
+        {
+          
+          "name": "Sør-Varanger",
+          "municipalityNumber": "2030"
+        }
+      ]
+    },
+    {
+      
+      "name": "Hedmark",
+      "countyCode": "04",
+      "municipalityList": [
+        {
+          
+          "name": "Kongsvinger",
+          "municipalityNumber": "0402"
+        },
+        {
+          
+          "name": "Hamar",
+          "municipalityNumber": "0403"
+        },
+        {
+          
+          "name": "Ringsaker",
+          "municipalityNumber": "0412"
+        },
+        {
+          
+          "name": "Løten",
+          "municipalityNumber": "0415"
+        },
+        {
+          
+          "name": "Stange",
+          "municipalityNumber": "0417"
+        },
+        {
+          
+          "name": "Nord-Odal",
+          "municipalityNumber": "0418"
+        },
+        {
+          
+          "name": "Sør-Odal",
+          "municipalityNumber": "0419"
+        },
+        {
+          
+          "name": "Eidskog",
+          "municipalityNumber": "0420"
+        },
+        {
+          
+          "name": "Grue",
+          "municipalityNumber": "0423"
+        },
+        {
+          
+          "name": "Åsnes",
+          "municipalityNumber": "0425"
+        },
+        {
+          
+          "name": "Våler i Hedmark",
+          "municipalityNumber": "0426"
+        },
+        {
+          
+          "name": "Elverum",
+          "municipalityNumber": "0427"
+        },
+        {
+          
+          "name": "Trysil",
+          "municipalityNumber": "0428"
+        },
+        {
+          
+          "name": "Åmot",
+          "municipalityNumber": "0429"
+        },
+        {
+          
+          "name": "Stor-Elvdal",
+          "municipalityNumber": "0430"
+        },
+        {
+          
+          "name": "Rendalen",
+          "municipalityNumber": "0432"
+        },
+        {
+          
+          "name": "Engerdal",
+          "municipalityNumber": "0434"
+        },
+        {
+          
+          "name": "Tolga",
+          "municipalityNumber": "0436"
+        },
+        {
+          
+          "name": "Tynset",
+          "municipalityNumber": "0437"
+        },
+        {
+          
+          "name": "Alvdal",
+          "municipalityNumber": "0438"
+        },
+        {
+          
+          "name": "Folldal",
+          "municipalityNumber": "0439"
+        },
+        {
+          
+          "name": "Os i Hedmark",
+          "municipalityNumber": "0441"
+        }
+      ]
+    },
+    {
+      
+      "name": "Hordaland",
+      "countyCode": "12",
+      "municipalityList": [
+        {
+          
+          "name": "Bergen",
+          "municipalityNumber": "1201"
+        },
+        {
+          
+          "name": "Etne",
+          "municipalityNumber": "1211"
+        },
+        {
+          
+          "name": "Sveio",
+          "municipalityNumber": "1216"
+        },
+        {
+          
+          "name": "Bømlo",
+          "municipalityNumber": "1219"
+        },
+        {
+          
+          "name": "Stord",
+          "municipalityNumber": "1221"
+        },
+        {
+          
+          "name": "Fitjar",
+          "municipalityNumber": "1222"
+        },
+        {
+          
+          "name": "Tysnes",
+          "municipalityNumber": "1223"
+        },
+        {
+          
+          "name": "Kvinnherad",
+          "municipalityNumber": "1224"
+        },
+        {
+          
+          "name": "Jondal",
+          "municipalityNumber": "1227"
+        },
+        {
+          
+          "name": "Odda",
+          "municipalityNumber": "1228"
+        },
+        {
+          
+          "name": "Ullensvang",
+          "municipalityNumber": "1231"
+        },
+        {
+          
+          "name": "Eidfjord",
+          "municipalityNumber": "1232"
+        },
+        {
+          
+          "name": "Ulvik",
+          "municipalityNumber": "1233"
+        },
+        {
+          
+          "name": "Granvin",
+          "municipalityNumber": "1234"
+        },
+        {
+          
+          "name": "Voss",
+          "municipalityNumber": "1235"
+        },
+        {
+          
+          "name": "Kvam",
+          "municipalityNumber": "1238"
+        },
+        {
+          
+          "name": "Fusa",
+          "municipalityNumber": "1241"
+        },
+        {
+          
+          "name": "Samnanger",
+          "municipalityNumber": "1242"
+        },
+        {
+          
+          "name": "Os i Hordaland",
+          "municipalityNumber": "1243"
+        },
+        {
+          
+          "name": "Austevoll",
+          "municipalityNumber": "1244"
+        },
+        {
+          
+          "name": "Sund",
+          "municipalityNumber": "1245"
+        },
+        {
+          
+          "name": "Fjell",
+          "municipalityNumber": "1246"
+        },
+        {
+          
+          "name": "Askøy",
+          "municipalityNumber": "1247"
+        },
+        {
+          
+          "name": "Vaksdal",
+          "municipalityNumber": "1251"
+        },
+        {
+          
+          "name": "Modalen",
+          "municipalityNumber": "1252"
+        },
+        {
+          
+          "name": "Osterøy",
+          "municipalityNumber": "1253"
+        },
+        {
+          
+          "name": "Meland",
+          "municipalityNumber": "1256"
+        },
+        {
+          
+          "name": "Øygarden",
+          "municipalityNumber": "1259"
+        },
+        {
+          
+          "name": "Radøy",
+          "municipalityNumber": "1260"
+        },
+        {
+          
+          "name": "Lindås",
+          "municipalityNumber": "1263"
+        },
+        {
+          
+          "name": "Austrheim",
+          "municipalityNumber": "1264"
+        },
+        {
+          
+          "name": "Fedje",
+          "municipalityNumber": "1265"
+        },
+        {
+          
+          "name": "Masfjorden",
+          "municipalityNumber": "1266"
+        }
+      ]
+    },
+    {
+      
+      "name": "Møre og Romsdal",
+      "countyCode": "15",
+      "municipalityList": [
+        {
+          
+          "name": "Molde",
+          "municipalityNumber": "1502"
+        },
+        {
+          
+          "name": "Ålesund",
+          "municipalityNumber": "1504"
+        },
+        {
+          
+          "name": "Kristiansund",
+          "municipalityNumber": "1505"
+        },
+        {
+          
+          "name": "Vanylven",
+          "municipalityNumber": "1511"
+        },
+        {
+          
+          "name": "Sande i Møre og Romsdal",
+          "municipalityNumber": "1514"
+        },
+        {
+          
+          "name": "Herøy i Møre og Romsdal",
+          "municipalityNumber": "1515"
+        },
+        {
+          
+          "name": "Ulstein",
+          "municipalityNumber": "1516"
+        },
+        {
+          
+          "name": "Hareid",
+          "municipalityNumber": "1517"
+        },
+        {
+          
+          "name": "Volda",
+          "municipalityNumber": "1519"
+        },
+        {
+          
+          "name": "Ørsta",
+          "municipalityNumber": "1520"
+        },
+        {
+          
+          "name": "Ørskog",
+          "municipalityNumber": "1523"
+        },
+        {
+          
+          "name": "Norddal",
+          "municipalityNumber": "1524"
+        },
+        {
+          
+          "name": "Stranda",
+          "municipalityNumber": "1525"
+        },
+        {
+          
+          "name": "Stordal",
+          "municipalityNumber": "1526"
+        },
+        {
+          
+          "name": "Sykkylven",
+          "municipalityNumber": "1528"
+        },
+        {
+          
+          "name": "Skodje",
+          "municipalityNumber": "1529"
+        },
+        {
+          
+          "name": "Sula",
+          "municipalityNumber": "1531"
+        },
+        {
+          
+          "name": "Giske",
+          "municipalityNumber": "1532"
+        },
+        {
+          
+          "name": "Haram",
+          "municipalityNumber": "1534"
+        },
+        {
+          
+          "name": "Vestnes",
+          "municipalityNumber": "1535"
+        },
+        {
+          
+          "name": "Rauma",
+          "municipalityNumber": "1539"
+        },
+        {
+          
+          "name": "Nesset",
+          "municipalityNumber": "1543"
+        },
+        {
+          
+          "name": "Midsund",
+          "municipalityNumber": "1545"
+        },
+        {
+          
+          "name": "Sandøy",
+          "municipalityNumber": "1546"
+        },
+        {
+          
+          "name": "Aukra",
+          "municipalityNumber": "1547"
+        },
+        {
+          
+          "name": "Fræna",
+          "municipalityNumber": "1548"
+        },
+        {
+          
+          "name": "Eide",
+          "municipalityNumber": "1551"
+        },
+        {
+          
+          "name": "Averøy",
+          "municipalityNumber": "1554"
+        },
+        {
+          
+          "name": "Gjemnes",
+          "municipalityNumber": "1557"
+        },
+        {
+          
+          "name": "Tingvoll",
+          "municipalityNumber": "1560"
+        },
+        {
+          
+          "name": "Sunndal",
+          "municipalityNumber": "1563"
+        },
+        {
+          
+          "name": "Surnadal",
+          "municipalityNumber": "1566"
+        },
+        {
+          
+          "name": "Halsa",
+          "municipalityNumber": "1571"
+        },
+        {
+          
+          "name": "Smøla",
+          "municipalityNumber": "1573"
+        },
+        {
+          
+          "name": "Aure",
+          "municipalityNumber": "1576"
+        }
+      ]
+    },
+    {
+      
+      "name": "Nordland",
+      "countyCode": "18",
+      "municipalityList": [
+        {
+          
+          "name": "Bodø",
+          "municipalityNumber": "1804"
+        },
+        {
+          
+          "name": "Narvik",
+          "municipalityNumber": "1805"
+        },
+        {
+          
+          "name": "Bindal",
+          "municipalityNumber": "1811"
+        },
+        {
+          
+          "name": "Sømna",
+          "municipalityNumber": "1812"
+        },
+        {
+          
+          "name": "Brønnøy",
+          "municipalityNumber": "1813"
+        },
+        {
+          
+          "name": "Vega",
+          "municipalityNumber": "1815"
+        },
+        {
+          
+          "name": "Vevelstad",
+          "municipalityNumber": "1816"
+        },
+        {
+          
+          "name": "Herøy i Nordland",
+          "municipalityNumber": "1818"
+        },
+        {
+          
+          "name": "Alstahaug",
+          "municipalityNumber": "1820"
+        },
+        {
+          
+          "name": "Leirfjord",
+          "municipalityNumber": "1822"
+        },
+        {
+          
+          "name": "Vefsn",
+          "municipalityNumber": "1824"
+        },
+        {
+          
+          "name": "Grane",
+          "municipalityNumber": "1825"
+        },
+        {
+          
+          "name": "Hattfjelldal",
+          "municipalityNumber": "1826"
+        },
+        {
+          
+          "name": "Dønna",
+          "municipalityNumber": "1827"
+        },
+        {
+          
+          "name": "Nesna",
+          "municipalityNumber": "1828"
+        },
+        {
+          
+          "name": "Hemnes",
+          "municipalityNumber": "1832"
+        },
+        {
+          
+          "name": "Rana",
+          "municipalityNumber": "1833"
+        },
+        {
+          
+          "name": "Lurøy",
+          "municipalityNumber": "1834"
+        },
+        {
+          
+          "name": "Træna",
+          "municipalityNumber": "1835"
+        },
+        {
+          
+          "name": "Rødøy",
+          "municipalityNumber": "1836"
+        },
+        {
+          
+          "name": "Meløy",
+          "municipalityNumber": "1837"
+        },
+        {
+          
+          "name": "Gildeskål",
+          "municipalityNumber": "1838"
+        },
+        {
+          
+          "name": "Beiarn",
+          "municipalityNumber": "1839"
+        },
+        {
+          
+          "name": "Saltdal",
+          "municipalityNumber": "1840"
+        },
+        {
+          
+          "name": "Fauske",
+          "municipalityNumber": "1841"
+        },
+        {
+          
+          "name": "Sørfold",
+          "municipalityNumber": "1845"
+        },
+        {
+          
+          "name": "Steigen",
+          "municipalityNumber": "1848"
+        },
+        {
+          
+          "name": "Hamarøy",
+          "municipalityNumber": "1849"
+        },
+        {
+          
+          "name": "Tysfjord",
+          "municipalityNumber": "1850"
+        },
+        {
+          
+          "name": "Lødingen",
+          "municipalityNumber": "1851"
+        },
+        {
+          
+          "name": "Tjeldsund",
+          "municipalityNumber": "1852"
+        },
+        {
+          
+          "name": "Evenes",
+          "municipalityNumber": "1853"
+        },
+        {
+          
+          "name": "Ballangen",
+          "municipalityNumber": "1854"
+        },
+        {
+          
+          "name": "Røst",
+          "municipalityNumber": "1856"
+        },
+        {
+          
+          "name": "Værøy",
+          "municipalityNumber": "1857"
+        },
+        {
+          
+          "name": "Flakstad",
+          "municipalityNumber": "1859"
+        },
+        {
+          
+          "name": "Vestvågøy",
+          "municipalityNumber": "1860"
+        },
+        {
+          
+          "name": "Vågan",
+          "municipalityNumber": "1865"
+        },
+        {
+          
+          "name": "Hadsel",
+          "municipalityNumber": "1866"
+        },
+        {
+          
+          "name": "Bø i Nordland",
+          "municipalityNumber": "1867"
+        },
+        {
+          
+          "name": "Øksnes",
+          "municipalityNumber": "1868"
+        },
+        {
+          
+          "name": "Sortland",
+          "municipalityNumber": "1870"
+        },
+        {
+          
+          "name": "Andøy",
+          "municipalityNumber": "1871"
+        },
+        {
+          
+          "name": "Moskenes",
+          "municipalityNumber": "1874"
+        }
+      ]
+    },
+    {
+      
+      "name": "Oppland",
+      "countyCode": "05",
+      "municipalityList": [
+        {
+          
+          "name": "Lillehammer",
+          "municipalityNumber": "0501"
+        },
+        {
+          
+          "name": "Gjøvik",
+          "municipalityNumber": "0502"
+        },
+        {
+          
+          "name": "Dovre",
+          "municipalityNumber": "0511"
+        },
+        {
+          
+          "name": "Lesja",
+          "municipalityNumber": "0512"
+        },
+        {
+          
+          "name": "Skjåk",
+          "municipalityNumber": "0513"
+        },
+        {
+          
+          "name": "Lom",
+          "municipalityNumber": "0514"
+        },
+        {
+          
+          "name": "Vågå",
+          "municipalityNumber": "0515"
+        },
+        {
+          
+          "name": "Nord-Fron",
+          "municipalityNumber": "0516"
+        },
+        {
+          
+          "name": "Sel",
+          "municipalityNumber": "0517"
+        },
+        {
+          
+          "name": "Sør-Fron",
+          "municipalityNumber": "0519"
+        },
+        {
+          
+          "name": "Ringebu",
+          "municipalityNumber": "0520"
+        },
+        {
+          
+          "name": "Øyer",
+          "municipalityNumber": "0521"
+        },
+        {
+          
+          "name": "Gausdal",
+          "municipalityNumber": "0522"
+        },
+        {
+          
+          "name": "Østre Toten",
+          "municipalityNumber": "0528"
+        },
+        {
+          
+          "name": "Vestre Toten",
+          "municipalityNumber": "0529"
+        },
+        {
+          
+          "name": "Jevnaker",
+          "municipalityNumber": "0532"
+        },
+        {
+          
+          "name": "Lunner",
+          "municipalityNumber": "0533"
+        },
+        {
+          
+          "name": "Gran",
+          "municipalityNumber": "0534"
+        },
+        {
+          
+          "name": "Søndre Land",
+          "municipalityNumber": "0536"
+        },
+        {
+          
+          "name": "Nordre Land",
+          "municipalityNumber": "0538"
+        },
+        {
+          
+          "name": "Sør-Aurdal",
+          "municipalityNumber": "0540"
+        },
+        {
+          
+          "name": "Etnedal",
+          "municipalityNumber": "0541"
+        },
+        {
+          
+          "name": "Nord-Aurdal",
+          "municipalityNumber": "0542"
+        },
+        {
+          
+          "name": "Vestre Slidre",
+          "municipalityNumber": "0543"
+        },
+        {
+          
+          "name": "Øystre Slidre",
+          "municipalityNumber": "0544"
+        },
+        {
+          
+          "name": "Vang",
+          "municipalityNumber": "0545"
+        }
+      ]
+    },
+    {
+      
+      "name": "Oslo",
+      "countyCode": "03",
+      "municipalityList": [
+        {
+          
+          "name": "Oslo",
+          "municipalityNumber": "0301"
+        }
+      ]
+    },
+    {
+      
+      "name": "Rogaland",
+      "countyCode": "11",
+      "municipalityList": [
+        {
+          
+          "name": "Eigersund",
+          "municipalityNumber": "1101"
+        },
+        {
+          
+          "name": "Sandnes",
+          "municipalityNumber": "1102"
+        },
+        {
+          
+          "name": "Stavanger",
+          "municipalityNumber": "1103"
+        },
+        {
+          
+          "name": "Haugesund",
+          "municipalityNumber": "1106"
+        },
+        {
+          
+          "name": "Sokndal",
+          "municipalityNumber": "1111"
+        },
+        {
+          
+          "name": "Lund",
+          "municipalityNumber": "1112"
+        },
+        {
+          
+          "name": "Bjerkreim",
+          "municipalityNumber": "1114"
+        },
+        {
+          
+          "name": "Hå",
+          "municipalityNumber": "1119"
+        },
+        {
+          
+          "name": "Klepp",
+          "municipalityNumber": "1120"
+        },
+        {
+          
+          "name": "Time",
+          "municipalityNumber": "1121"
+        },
+        {
+          
+          "name": "Gjesdal",
+          "municipalityNumber": "1122"
+        },
+        {
+          
+          "name": "Sola",
+          "municipalityNumber": "1124"
+        },
+        {
+          
+          "name": "Randaberg",
+          "municipalityNumber": "1127"
+        },
+        {
+          
+          "name": "Forsand",
+          "municipalityNumber": "1129"
+        },
+        {
+          
+          "name": "Strand",
+          "municipalityNumber": "1130"
+        },
+        {
+          
+          "name": "Hjelmeland",
+          "municipalityNumber": "1133"
+        },
+        {
+          
+          "name": "Suldal",
+          "municipalityNumber": "1134"
+        },
+        {
+          
+          "name": "Sauda",
+          "municipalityNumber": "1135"
+        },
+        {
+          
+          "name": "Finnøy",
+          "municipalityNumber": "1141"
+        },
+        {
+          
+          "name": "Rennesøy",
+          "municipalityNumber": "1142"
+        },
+        {
+          
+          "name": "Kvitsøy",
+          "municipalityNumber": "1144"
+        },
+        {
+          
+          "name": "Bokn",
+          "municipalityNumber": "1145"
+        },
+        {
+          
+          "name": "Tysvær",
+          "municipalityNumber": "1146"
+        },
+        {
+          
+          "name": "Karmøy",
+          "municipalityNumber": "1149"
+        },
+        {
+          
+          "name": "Utsira",
+          "municipalityNumber": "1151"
+        },
+        {
+          
+          "name": "Vindafjord",
+          "municipalityNumber": "1160"
+        }
+      ]
+    },
+    {
+      
+      "name": "Sogn og Fjordane",
+      "countyCode": "14",
+      "municipalityList": [
+        {
+          
+          "name": "Flora",
+          "municipalityNumber": "1401"
+        },
+        {
+          
+          "name": "Gulen",
+          "municipalityNumber": "1411"
+        },
+        {
+          
+          "name": "Solund",
+          "municipalityNumber": "1412"
+        },
+        {
+          
+          "name": "Hyllestad",
+          "municipalityNumber": "1413"
+        },
+        {
+          
+          "name": "Høyanger",
+          "municipalityNumber": "1416"
+        },
+        {
+          
+          "name": "Vik",
+          "municipalityNumber": "1417"
+        },
+        {
+          
+          "name": "Balestrand",
+          "municipalityNumber": "1418"
+        },
+        {
+          
+          "name": "Leikanger",
+          "municipalityNumber": "1419"
+        },
+        {
+          
+          "name": "Sogndal",
+          "municipalityNumber": "1420"
+        },
+        {
+          
+          "name": "Aurland",
+          "municipalityNumber": "1421"
+        },
+        {
+          
+          "name": "Lærdal",
+          "municipalityNumber": "1422"
+        },
+        {
+          
+          "name": "Årdal",
+          "municipalityNumber": "1424"
+        },
+        {
+          
+          "name": "Luster",
+          "municipalityNumber": "1426"
+        },
+        {
+          
+          "name": "Askvoll",
+          "municipalityNumber": "1428"
+        },
+        {
+          
+          "name": "Fjaler",
+          "municipalityNumber": "1429"
+        },
+        {
+          
+          "name": "Gaular",
+          "municipalityNumber": "1430"
+        },
+        {
+          
+          "name": "Jølster",
+          "municipalityNumber": "1431"
+        },
+        {
+          
+          "name": "Førde",
+          "municipalityNumber": "1432"
+        },
+        {
+          
+          "name": "Naustdal",
+          "municipalityNumber": "1433"
+        },
+        {
+          
+          "name": "Bremanger",
+          "municipalityNumber": "1438"
+        },
+        {
+          
+          "name": "Vågsøy",
+          "municipalityNumber": "1439"
+        },
+        {
+          
+          "name": "Selje",
+          "municipalityNumber": "1441"
+        },
+        {
+          
+          "name": "Eid",
+          "municipalityNumber": "1443"
+        },
+        {
+          
+          "name": "Hornindal",
+          "municipalityNumber": "1444"
+        },
+        {
+          
+          "name": "Gloppen",
+          "municipalityNumber": "1445"
+        },
+        {
+          
+          "name": "Stryn",
+          "municipalityNumber": "1449"
+        }
+      ]
+    },
+    {
+      
+      "name": "Telemark",
+      "countyCode": "08",
+      "municipalityList": [
+        {
+          
+          "name": "Porsgrunn",
+          "municipalityNumber": "0805"
+        },
+        {
+          
+          "name": "Skien",
+          "municipalityNumber": "0806"
+        },
+        {
+          
+          "name": "Notodden",
+          "municipalityNumber": "0807"
+        },
+        {
+          
+          "name": "Siljan",
+          "municipalityNumber": "0811"
+        },
+        {
+          
+          "name": "Bamble",
+          "municipalityNumber": "0814"
+        },
+        {
+          
+          "name": "Kragerø",
+          "municipalityNumber": "0815"
+        },
+        {
+          
+          "name": "Drangedal",
+          "municipalityNumber": "0817"
+        },
+        {
+          
+          "name": "Nome",
+          "municipalityNumber": "0819"
+        },
+        {
+          
+          "name": "Bø i Telemark",
+          "municipalityNumber": "0821"
+        },
+        {
+          
+          "name": "Sauherad",
+          "municipalityNumber": "0822"
+        },
+        {
+          
+          "name": "Tinn",
+          "municipalityNumber": "0826"
+        },
+        {
+          
+          "name": "Hjartdal",
+          "municipalityNumber": "0827"
+        },
+        {
+          
+          "name": "Seljord",
+          "municipalityNumber": "0828"
+        },
+        {
+          
+          "name": "Kviteseid",
+          "municipalityNumber": "0829"
+        },
+        {
+          
+          "name": "Nissedal",
+          "municipalityNumber": "0830"
+        },
+        {
+          
+          "name": "Fyresdal",
+          "municipalityNumber": "0831"
+        },
+        {
+          
+          "name": "Tokke",
+          "municipalityNumber": "0833"
+        },
+        {
+          
+          "name": "Vinje",
+          "municipalityNumber": "0834"
+        }
+      ]
+    },
+    {
+      
+      "name": "Troms",
+      "countyCode": "19",
+      "municipalityList": [
+        {
+          
+          "name": "Tromsø",
+          "municipalityNumber": "1902"
+        },
+        {
+          
+          "name": "Harstad",
+          "municipalityNumber": "1903"
+        },
+        {
+          
+          "name": "Kvæfjord",
+          "municipalityNumber": "1911"
+        },
+        {
+          
+          "name": "Skånland",
+          "municipalityNumber": "1913"
+        },
+        {
+          
+          "name": "Ibestad",
+          "municipalityNumber": "1917"
+        },
+        {
+          
+          "name": "Gratangen",
+          "municipalityNumber": "1919"
+        },
+        {
+          
+          "name": "Lavangen",
+          "municipalityNumber": "1920"
+        },
+        {
+          
+          "name": "Bardu",
+          "municipalityNumber": "1922"
+        },
+        {
+          
+          "name": "Salangen",
+          "municipalityNumber": "1923"
+        },
+        {
+          
+          "name": "Målselv",
+          "municipalityNumber": "1924"
+        },
+        {
+          
+          "name": "Sørreisa",
+          "municipalityNumber": "1925"
+        },
+        {
+          
+          "name": "Dyrøy",
+          "municipalityNumber": "1926"
+        },
+        {
+          
+          "name": "Tranøy",
+          "municipalityNumber": "1927"
+        },
+        {
+          
+          "name": "Torsken",
+          "municipalityNumber": "1928"
+        },
+        {
+          
+          "name": "Berg",
+          "municipalityNumber": "1929"
+        },
+        {
+          
+          "name": "Lenvik",
+          "municipalityNumber": "1931"
+        },
+        {
+          
+          "name": "Balsfjord",
+          "municipalityNumber": "1933"
+        },
+        {
+          
+          "name": "Karlsøy",
+          "municipalityNumber": "1936"
+        },
+        {
+          
+          "name": "Lyngen",
+          "municipalityNumber": "1938"
+        },
+        {
+          
+          "name": "Storfjord",
+          "municipalityNumber": "1939"
+        },
+        {
+          
+          "name": "Kåfjord",
+          "municipalityNumber": "1940"
+        },
+        {
+          
+          "name": "Skjervøy",
+          "municipalityNumber": "1941"
+        },
+        {
+          
+          "name": "Nordreisa",
+          "municipalityNumber": "1942"
+        },
+        {
+          
+          "name": "Kvænangen",
+          "municipalityNumber": "1943"
+        }
+      ]
+    },
+    {
+      
+      "name": "Trøndelag",
+      "countyCode": "50",
+      "municipalityList": [
+        {
+          
+          "name": "Rindal",
+          "municipalityNumber": "5061"
+        },
+        {
+          
+          "name": "Trondheim",
+          "municipalityNumber": "5001"
+        },
+        {
+          
+          "name": "Hemne",
+          "municipalityNumber": "5011"
+        },
+        {
+          
+          "name": "Snillfjord",
+          "municipalityNumber": "5012"
+        },
+        {
+          
+          "name": "Hitra",
+          "municipalityNumber": "5013"
+        },
+        {
+          
+          "name": "Frøya",
+          "municipalityNumber": "5014"
+        },
+        {
+          
+          "name": "Ørland",
+          "municipalityNumber": "5015"
+        },
+        {
+          
+          "name": "Agdenes",
+          "municipalityNumber": "5016"
+        },
+        {
+          
+          "name": "Bjugn",
+          "municipalityNumber": "5017"
+        },
+        {
+          
+          "name": "Åfjord",
+          "municipalityNumber": "5018"
+        },
+        {
+          
+          "name": "Roan",
+          "municipalityNumber": "5019"
+        },
+        {
+          
+          "name": "Osen",
+          "municipalityNumber": "5020"
+        },
+        {
+          
+          "name": "Oppdal",
+          "municipalityNumber": "5021"
+        },
+        {
+          
+          "name": "Rennebu",
+          "municipalityNumber": "5022"
+        },
+        {
+          
+          "name": "Meldal",
+          "municipalityNumber": "5023"
+        },
+        {
+          
+          "name": "Orkdal",
+          "municipalityNumber": "5024"
+        },
+        {
+          
+          "name": "Røros",
+          "municipalityNumber": "5025"
+        },
+        {
+          
+          "name": "Holtålen",
+          "municipalityNumber": "5026"
+        },
+        {
+          
+          "name": "Midtre Gauldal",
+          "municipalityNumber": "5027"
+        },
+        {
+          
+          "name": "Melhus",
+          "municipalityNumber": "5028"
+        },
+        {
+          
+          "name": "Skaun",
+          "municipalityNumber": "5029"
+        },
+        {
+          
+          "name": "Klæbu",
+          "municipalityNumber": "5030"
+        },
+        {
+          
+          "name": "Malvik",
+          "municipalityNumber": "5031"
+        },
+        {
+          
+          "name": "Selbu",
+          "municipalityNumber": "5032"
+        },
+        {
+          
+          "name": "Tydal",
+          "municipalityNumber": "5033"
+        },
+        {
+          
+          "name": "Steinkjer",
+          "municipalityNumber": "5004"
+        },
+        {
+          
+          "name": "Namsos",
+          "municipalityNumber": "5005"
+        },
+        {
+          
+          "name": "Meråker",
+          "municipalityNumber": "5034"
+        },
+        {
+          
+          "name": "Stjørdal",
+          "municipalityNumber": "5035"
+        },
+        {
+          
+          "name": "Frosta",
+          "municipalityNumber": "5036"
+        },
+        {
+          
+          "name": "Levanger",
+          "municipalityNumber": "5037"
+        },
+        {
+          
+          "name": "Verdal",
+          "municipalityNumber": "5038"
+        },
+        {
+          
+          "name": "Verran",
+          "municipalityNumber": "5039"
+        },
+        {
+          
+          "name": "Namdalseid",
+          "municipalityNumber": "5040"
+        },
+        {
+          
+          "name": "Snåsa",
+          "municipalityNumber": "5041"
+        },
+        {
+          
+          "name": "Lierne",
+          "municipalityNumber": "5042"
+        },
+        {
+          
+          "name": "Røyrvik",
+          "municipalityNumber": "5043"
+        },
+        {
+          
+          "name": "Namsskogan",
+          "municipalityNumber": "5044"
+        },
+        {
+          
+          "name": "Grong",
+          "municipalityNumber": "5045"
+        },
+        {
+          
+          "name": "Høylandet",
+          "municipalityNumber": "5046"
+        },
+        {
+          
+          "name": "Overhalla",
+          "municipalityNumber": "5047"
+        },
+        {
+          
+          "name": "Fosnes",
+          "municipalityNumber": "5048"
+        },
+        {
+          
+          "name": "Flatanger",
+          "municipalityNumber": "5049"
+        },
+        {
+          
+          "name": "Vikna",
+          "municipalityNumber": "5050"
+        },
+        {
+          
+          "name": "Nærøy",
+          "municipalityNumber": "5051"
+        },
+        {
+          
+          "name": "Leka",
+          "municipalityNumber": "5052"
+        },
+        {
+          
+          "name": "Inderøy",
+          "municipalityNumber": "5053"
+        },
+        {
+          
+          "name": "Indre Fosen",
+          "municipalityNumber": "5054"
+        }
+      ]
+    },
+    {
+      
+      "name": "Vest-Agder",
+      "countyCode": "10",
+      "municipalityList": [
+        {
+          
+          "name": "Kristiansand",
+          "municipalityNumber": "1001"
+        },
+        {
+          
+          "name": "Mandal",
+          "municipalityNumber": "1002"
+        },
+        {
+          
+          "name": "Farsund",
+          "municipalityNumber": "1003"
+        },
+        {
+          
+          "name": "Flekkefjord",
+          "municipalityNumber": "1004"
+        },
+        {
+          
+          "name": "Vennesla",
+          "municipalityNumber": "1014"
+        },
+        {
+          
+          "name": "Songdalen",
+          "municipalityNumber": "1017"
+        },
+        {
+          
+          "name": "Søgne",
+          "municipalityNumber": "1018"
+        },
+        {
+          
+          "name": "Marnardal",
+          "municipalityNumber": "1021"
+        },
+        {
+          
+          "name": "Åseral",
+          "municipalityNumber": "1026"
+        },
+        {
+          
+          "name": "Audnedal",
+          "municipalityNumber": "1027"
+        },
+        {
+          
+          "name": "Lindesnes",
+          "municipalityNumber": "1029"
+        },
+        {
+          
+          "name": "Lyngdal",
+          "municipalityNumber": "1032"
+        },
+        {
+          
+          "name": "Hægebostad",
+          "municipalityNumber": "1034"
+        },
+        {
+          
+          "name": "Kvinesdal",
+          "municipalityNumber": "1037"
+        },
+        {
+          
+          "name": "Sirdal",
+          "municipalityNumber": "1046"
+        }
+      ]
+    },
+    {
+      
+      "name": "Vestfold",
+      "countyCode": "07",
+      "municipalityList": [
+        {
+          
+          "name": "Horten",
+          "municipalityNumber": "0701"
+        },
+        {
+          
+          "name": "Holmestrand",
+          "municipalityNumber": "0715"
+        },
+        {
+          
+          "name": "Tønsberg",
+          "municipalityNumber": "0704"
+        },
+        {
+          
+          "name": "Sandefjord",
+          "municipalityNumber": "0710"
+        },
+        {
+          
+          "name": "Svelvik",
+          "municipalityNumber": "0711"
+        },
+        {
+          
+          "name": "Larvik",
+          "municipalityNumber": "0712"
+        },
+        {
+          
+          "name": "Sande i Vestfold",
+          "municipalityNumber": "0713"
+        },
+        {
+          
+          "name": "Re",
+          "municipalityNumber": "0716"
+        },
+        {
+          
+          "name": "Færder",
+          "municipalityNumber": "0729"
+        }
+      ]
+    },
+    {
+      
+      "name": "Østfold",
+      "countyCode": "01",
+      "municipalityList": [
+        {
+          
+          "name": "Halden",
+          "municipalityNumber": "0101"
+        },
+        {
+          
+          "name": "Moss",
+          "municipalityNumber": "0104"
+        },
+        {
+          
+          "name": "Sarpsborg",
+          "municipalityNumber": "0105"
+        },
+        {
+          
+          "name": "Fredrikstad",
+          "municipalityNumber": "0106"
+        },
+        {
+          
+          "name": "Hvaler",
+          "municipalityNumber": "0111"
+        },
+        {
+          
+          "name": "Aremark",
+          "municipalityNumber": "0118"
+        },
+        {
+          
+          "name": "Marker",
+          "municipalityNumber": "0119"
+        },
+        {
+          
+          "name": "Rømskog",
+          "municipalityNumber": "0121"
+        },
+        {
+          
+          "name": "Trøgstad",
+          "municipalityNumber": "0122"
+        },
+        {
+          
+          "name": "Spydeberg",
+          "municipalityNumber": "0123"
+        },
+        {
+          
+          "name": "Askim",
+          "municipalityNumber": "0124"
+        },
+        {
+          
+          "name": "Eidsberg",
+          "municipalityNumber": "0125"
+        },
+        {
+          
+          "name": "Skiptvet",
+          "municipalityNumber": "0127"
+        },
+        {
+          
+          "name": "Rakkestad",
+          "municipalityNumber": "0128"
+        },
+        {
+          
+          "name": "Råde",
+          "municipalityNumber": "0135"
+        },
+        {
+          
+          "name": "Rygge",
+          "municipalityNumber": "0136"
+        },
+        {
+          
+          "name": "Våler i Østfold",
+          "municipalityNumber": "0137"
+        },
+        {
+          
+          "name": "Hobøl",
+          "municipalityNumber": "0138"
+        }
+      ]
+    }
+  ]
+}
