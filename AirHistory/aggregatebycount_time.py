@@ -6,7 +6,7 @@ from pathlib import Path
 from dateutil.parser import parse
 
 thresholds = {
-    "SO2": { "lower": 10000, "upper": 14000,"boundary": 350},
+    "SO2": {"boundary": 350},
     "NO2": {"lower": 100, "upper": 140, "boundary": 200}
     }
 
@@ -17,10 +17,10 @@ def HandleDirectory(path):
         HandleMunicipalityDir(entry)
 
 def HandleMunicipalityDir(entry):
+    outputDirPath = os.path.join(entry.absolute(), "ThresholdCountTime")
+    EnsurePathExists(outputDirPath)
     valuesPath = os.path.join(entry.absolute(), "Values")
     valuesDir = Path(valuesPath)
-    outputDirPath = os.path.join(entry.absolute(), "ThresholdCount")
-    EnsurePathExists(outputDirPath)
     for fileInDir in valuesDir.iterdir():
         if fileInDir.is_dir():
             continue
@@ -38,6 +38,7 @@ def HandleStation(entry, outputDirPath):
                 countStation['components'].append(countComponent)
 
     outputPath = os.path.join(outputDirPath, entry.name)
+    print(outputPath)
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
         json.dump(countStation, outputFile)
 
@@ -55,7 +56,7 @@ def HandleComponent(component):
     return countComp
 
 def UpdateCount(counts, value, threshold):
-    startDate = parse(value['dateTime'])
+    startDate = parse(value['fromTime'])
     year = startDate.year
 
     if not year in counts:
@@ -63,10 +64,10 @@ def UpdateCount(counts, value, threshold):
 
     val = value['value']
 
-    if val > threshold["lower"]:
+    if "lower" in threshold and val > threshold["lower"]:
         counts[year]["lowerThreshold"] += 1
 
-    if val > threshold["upper"]:
+    if "upper" in threshold and val > threshold["upper"]:
         counts[year]["upperThreshold"] += 1
         
     if val > threshold["boundary"]:
@@ -76,5 +77,6 @@ def EnsurePathExists(dirPath):
     if not os.path.exists(dirPath):
         os.mkdir(dirPath)
 
-inputDir = Path('output/Aggregated')
+inputDir = Path('obs/Aggregated')
 HandleDirectory(inputDir)
+
