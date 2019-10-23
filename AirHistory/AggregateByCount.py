@@ -1,3 +1,4 @@
+import argparse
 import json
 import datetime
 import os
@@ -5,76 +6,153 @@ import os.path
 from pathlib import Path
 from dateutil.parser import parse
 
-thresholds = {
-    "SO2": {"lower": 50, "upper": 75, "boundary": 125},
-    "PM10": {"lower": 25, "upper": 35, "boundary": 50}
-    }
+ThresholdsList = []
+MinCoverage = 100
 
-def HandleDirectory(path):
-    for entry in path.iterdir():
-        if not entry.is_dir():
+def GetPathFromArgument(argName, argValue):
+    if argValue is None:
+        raise Exception(f"{argName} path not provided")
+    argPath = Path(argValue)
+    VerifyPath(argName, argPath)
+    return argPath
+
+def VerifyPath(name, path):
+    if not os.path.exists(path):
+        raise Exception(f"{name} path does not exist: [{path}]")
+    if not path.is_dir():
+        raise Exception(f"{name} path is not a folder: [{path}]")
+
+def GetValueTypeFromArgument(valueType):
+    if valueType is None:
+        raise Exception("ValueType not provided")
+    if valueType not in ["hourly","daily","yearly"]:
+        raise Exception(f"ValueType [{valueType}] is not supported. The following types are supported: ['hourly', 'daily', 'yearly']")
+    
+    return valueType
+
+def InitializeThresholdList(settingsPath, valueType):
+    thresholdsPath = os.path.join(settingsPath.absolute(), f"thresholds_{valueType}.json")
+    if not os.path.exists(thresholdsPath):
+        raise Exception(f"Threshold file not found: [{thresholdsPath}]")
+
+    with open(thresholdsPath, mode="r", encoding="utf-8") as inputFile:
+        ThresholdsList.extend(json.load(inputFile))
+        
+    if len(ThresholdsList) == 0:
+        raise Exception(f"Threshold file empty: [{thresholdsPath}]")
+    
+def AggregateByThreshold(path, valueType):
+    for directory in path.iterdir():
+        if not directory.is_dir():
             continue
-        HandleMunicipalityDir(entry)
+        HandleMunicipalityDir(directory, valueType)
+    print(f"MinCoverage: {MinCoverage}")
 
-def HandleMunicipalityDir(entry):
-    valuesPath = os.path.join(entry.absolute(), "Values")
-    valuesDir = Path(valuesPath)
-    outputDirPath = os.path.join(entry.absolute(), "ThresholdCount")
-    EnsurePathExists(outputDirPath)
-    for fileInDir in valuesDir.iterdir():
-        if fileInDir.is_dir():
+def HandleMunicipalityDir(municipalityDir, valueType):
+    for stationDir in municipalityDir.iterdir():
+        if stationDir.is_file():
             continue
-        HandleStation(fileInDir, outputDirPath)
+        HandleStation(stationDir, valueType)
 
-def HandleStation(entry, outputDirPath):
+def HandleStation(entry, valueType):
+    valuePath = os.path.join(entry, f"{valueType}.json")
+    outputPath = os.path.join(entry, f"{valueType}_threshold.json")
     countStation = {}
-    with open(entry.absolute(), mode="r", encoding="utf-8") as inputFile:
+    with open(valuePath, mode="r", encoding="utf-8") as inputFile:
         valStation = json.load(inputFile)
         countStation = valStation.copy()
         countStation['components'] = []
         for component in valStation['components']:
-            countComponent = HandleComponent(component)
+            countComponent = HandleComponent(component, valueType)
             if not countComponent is None:
                 countStation['components'].append(countComponent)
 
-    outputPath = os.path.join(outputDirPath, entry.name)
+    print(outputPath)
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
         json.dump(countStation, outputFile)
 
-def HandleComponent(component):
+def HandleComponent(component, valueType):
     componentName = component["component"]
-    countComp = {"component": componentName, "counts": []}
-    if not componentName in thresholds:
-        return
+    countComp = None
 
     counts = {}
     for value in component['values']:
-        UpdateCount(counts, value, thresholds[componentName])
+        UpdateCount(counts, value, componentName, valueType)
     
-    countComp["counts"].extend(counts.values())
+    if len(counts) > 0:
+        countComp = {"component": componentName, "counts": []}
+        countComp["counts"].extend(counts.values())
+        
     return countComp
 
-def UpdateCount(counts, value, threshold):
-    startDate = parse(value['dateTime'])
-    year = startDate.year
+def UpdateCount(counts, value, componentName, valueType):
+    year = GetYear(value)
+
+    thresholds = GetThresholds(componentName, year)
+    if thresholds is None:
+        return
 
     if not year in counts:
-        counts[year] = {"year":year, "lowerThreshold": 0, "upperThreshold": 0, "boundary": 0}
+        counts[year] = {"year":year, "validValues": 0, "lowerThreshold": 0, "upperThreshold": 0, "boundary": 0}
+
+    if not ValidateValue(value, valueType):
+        return
+    counts[year]["validValues"] += 1
 
     val = value['value']
-
-    if val > threshold["lower"]:
+    if "lower" in thresholds and val > thresholds["lower"]:
         counts[year]["lowerThreshold"] += 1
 
-    if val > threshold["upper"]:
+    if "upper" in thresholds and val > thresholds["upper"]:
         counts[year]["upperThreshold"] += 1
         
-    if val > threshold["boundary"]:
+    if val > thresholds["boundary"]:
         counts[year]["boundary"] += 1
+
+def GetYear(value):
+    dateString = None
+    if 'dateTime' in value:
+        dateString = value['dateTime']
+    elif 'fromTime' in value:
+        dateString = value['fromTime']
+
+    startDate = parse(dateString)
+    return startDate.year
+
+def ValidateValue(value, valueType):
+    global MinCoverage
+
+    if valueType == "hourly" and value["qualityControlled"] == False:
+        return False
+    if valueType == "daily" and value["coverage"] < MinCoverage:
+        MinCoverage = value["coverage"]
+    if valueType == "daily" and value["coverage"] < 85:
+        print(f"################  Invalid coverage: {value['coverage']} ################")
+        return False
+
+    return True
+    
+def GetThresholds(componentName, year):
+    for thresholds in ThresholdsList:
+        if (componentName in thresholds) and (year in thresholds["ValidForYears"]):
+            return thresholds[componentName]
+            
+    return None
 
 def EnsurePathExists(dirPath):
     if not os.path.exists(dirPath):
         os.mkdir(dirPath)
 
-inputDir = Path('output/Aggregated')
-HandleDirectory(inputDir)
+argumentParser = argparse.ArgumentParser()
+argumentParser.add_argument("--path", "-p", help="provide the input folder")
+argumentParser.add_argument("--settings", "-s", help="provide the output folder")
+argumentParser.add_argument("--type", "-t", help="'hourly', 'daily' or 'yearly'")
+
+args = argumentParser.parse_args()
+
+path = GetPathFromArgument("path", args.path)
+settingsPath = GetPathFromArgument("thresholds", args.settings)
+valueType = GetValueTypeFromArgument(args.type)
+
+InitializeThresholdList(settingsPath, valueType)
+AggregateByThreshold(path, valueType)

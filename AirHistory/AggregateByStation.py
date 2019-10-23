@@ -1,28 +1,72 @@
+import argparse
 import json
 import datetime
 import os
 import os.path
 from pathlib import Path
 
-inputPath = Path('output')
-
+# Globals
 stationsByMunicipality = {}
 componentsByStation = {}
+municipalityNumberByName = {}
 
-def HandleDirectory(path):
-    print(inputPath.absolute())
-    for entry in inputPath.iterdir():
-        if entry.is_dir():
-            continue
-        HandleFile(entry)
+def GetPathFromArgument(argName, argValue, isFileExpected = False, createFolder = False):
+    assert not (isFileExpected and createFolder)
 
-    OutputJsonFiles(inputPath)
+    if argValue is None:
+        raise Exception(f"{argName} path not provided")
 
-def HandleFile(entry):
-    with open(entry.absolute(), mode="r", encoding="utf-8") as inputFile:
+    argPath = Path(argValue)
+    if createFolder:
+        EnsurePathExists(argPath)
+
+    VerifyPath(argName, argPath, isFileExpected)
+    return argPath
+
+def VerifyPath(name, path, isFileExpected):
+    if not os.path.exists(path):
+        raise Exception(f"{name} path does not exist: [{path}]")
+    if (not isFileExpected) and not path.is_dir():
+        raise Exception(f"{name} path is not a folder: [{path}]")
+    if isFileExpected and not path.is_file():
+        raise Exception(f"{name} path is not a file: [{path}]")
+
+def GetValueTypeFromArgument(valueType):
+    if valueType is None:
+        raise Exception("ValueType not provided")
+    if valueType not in ["hourly","daily","yearly"]:
+        raise Exception(f"ValueType [{valueType}] is not supported. The following types are supported: ['hourly', 'daily', 'yearly']")
+    
+    return valueType
+
+def InitializeMunicipalities(path):
+    data = {}
+    with open(path.absolute(), mode="r", encoding="utf-8") as inputFile:
         data = json.load(inputFile)
-        for component in data:
-            HandleComponent(component)
+
+    counties = data["countyList"]
+    for county in counties:
+        municipalities = county["municipalityList"]
+        for municipality in municipalities:
+            municipalityNumberByName[municipality["name"]] = municipality["municipalityNumber"]
+
+def AggregateValuesByStation(inputPath, outputPath, valueType):
+    print(f"input: {inputPath.absolute()} - output: {outputPath.absolute()} - type: {valueType}")
+    for inputMonthFilePath in inputPath.iterdir():
+        if inputMonthFilePath.is_dir():
+            continue
+        HandleFile(inputMonthFilePath)
+
+    OutputJsonFiles(outputPath, valueType)
+
+def HandleFile(path):
+    data = []
+    #with open(path.absolute(), mode="r", encoding="iso-8859-1") as inputFile:
+    with open(path.absolute(), mode="r", encoding="utf-8") as inputFile:
+        data = json.load(inputFile)
+
+    for component in data:
+        HandleComponent(component)
 
 def HandleComponent(component):
     storedComponent = GetOrCreateStoredComponent(component)
@@ -55,9 +99,13 @@ def GetOrCreateStoredComponent(component):
     if not municipality in stationsByMunicipality:
         stationsByMunicipality[municipality] = {}
 
+    if not municipality in municipalityNumberByName:
+        print(f"Municipality number for [{municipality}] not found")
+        municipalityNumberByName[municipality] = r"N/A"
+
     stations = stationsByMunicipality[municipality]
     if not stationName in stations:
-        stations[stationName] = {"municipality": municipality, "station": stationName, "components": []}
+        stations[stationName] = {"municipality": municipality, "municipalityNumber": municipalityNumberByName[municipality],"station": stationName, "components": []}
 
     if not stationName in componentsByStation:
         componentsByStation[stationName] = {}
@@ -82,28 +130,39 @@ def AddValues(storedComponent, component):
     for value in component["values"]:
         value["timestep"] = component['timestep']
 
-    storedComponent["values"].extend(component["values"])
-    
-def OutputJsonFiles(path):
-    outputPath = os.path.join(inputPath, "Aggregated")
-    EnsurePathExists(outputPath)
-
+    storedComponent["values"] += component["values"]
+  
+def OutputJsonFiles(outputPath, valueType):
     for municipality in stationsByMunicipality:
         municipalityPath = os.path.join(outputPath, municipality)
         EnsurePathExists(municipalityPath)
 
-        valuesPath = os.path.join(municipalityPath, "Values")
-        EnsurePathExists(valuesPath)
-
         stations = stationsByMunicipality[municipality]
         for stationName in stations:
-            stationPath = os.path.join(valuesPath, f'{stationName}.json')
+            stationPath = os.path.join(municipalityPath, stationName)
+            EnsurePathExists(stationPath)
+
+            outputFilePath = os.path.join(stationPath, f'{valueType}.json')
             print(stationPath)
-            with open(stationPath, mode="w", encoding="utf-8") as stationFile:
+            with open(outputFilePath, mode="w", encoding="utf-8") as stationFile:
                 json.dump(stations[stationName], stationFile)
 
 def EnsurePathExists(dirPath):
     if not os.path.exists(dirPath):
         os.mkdir(dirPath)
 
-HandleDirectory(inputPath)
+argumentParser = argparse.ArgumentParser()
+argumentParser.add_argument("--input", "-i", help="provide the input folder")
+argumentParser.add_argument("--output", "-o", help="provide the output folder")
+argumentParser.add_argument("--municipalities", "-m", help="provide the output folder")
+argumentParser.add_argument("--type", "-t", help="'hourly', 'daily' or 'yearly'")
+
+args = argumentParser.parse_args()
+
+inputPath = GetPathFromArgument("input", args.input)
+outputPath = GetPathFromArgument("output", args.output, False, True)
+municipalitiesPath = GetPathFromArgument("municipalities", args.municipalities, True)
+valueType = GetValueTypeFromArgument(args.type)
+
+InitializeMunicipalities(municipalitiesPath)
+AggregateValuesByStation(inputPath, outputPath, valueType)
