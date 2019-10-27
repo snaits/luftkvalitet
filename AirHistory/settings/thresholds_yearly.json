@@ -1,1 +1,21 @@
-[]
+[
+    {
+    "ValidForYears": [2008,2009,2010,2011,2012,2013,2014,2015],
+    "PM2.5": {"lower": 12, "upper": 17, "boundary": 25},
+    "PM10": {"lower": 20, "upper": 28, "boundary": 40}
+    }
+    {
+    "ValidForYears": [2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018],
+    "NO2": {"lower": 26, "upper": 32, "boundary": 40},
+    "Lead": {"lower": 0.25, "upper": 0.35, "boundary": 0.5}
+    "Benzene": {"lower": 2, "upper": 3.5 "boundary": 5},
+    "As": {"lower": 2.4, "upper": 3.6, "boundary": 6}
+    "Ni": {"lower": 10, "upper": 14, "boundary": 20},
+    "cd": {"lower": 2, "upper": 3, "boundary": 5}
+    "benzoapyrene": {"lower": 0.4, "upper": 0.6, "boundary": 1},
+    }
+    {
+    "ValidForYears": [2016,2017,2018],
+    "PM10": {"lower": 20, "upper": 22, "boundary": 25}
+    "PM2.5": {"lower": 10, "upper": 12, "boundary": 15},
+]
