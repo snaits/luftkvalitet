@@ -11,23 +11,6 @@ from time import time
 from datetime import timedelta
 
 
-ThresholdsList = []
-
-MinimumValidHours = 7403
-MiminumValidHoursLeap = 7423
-
-
-def InitializeThresholdList(settingsPath):
-    thresholdsPath = os.path.join(settingsPath.absolute(), f"thresholds_yearly.json")
-    if not os.path.exists(thresholdsPath):
-        raise Exception(f"Threshold file not found: [{thresholdsPath}]")
-
-    with open(thresholdsPath, mode="r", encoding="utf-8") as inputFile:
-        ThresholdsList.extend(json.load(inputFile))
-        
-    if len(ThresholdsList) == 0:
-        raise Exception(f"Threshold file empty: [{thresholdsPath}]")
-
 def GetPathFromArgument(argName, argValue):
     if argValue is None:
         raise Exception(f"{argName} path not provided")
@@ -35,81 +18,81 @@ def GetPathFromArgument(argName, argValue):
     VerifyPath(argName, argPath)
     return argPath
 
+def GetValueTypeFromArgument(valueType):
+    if valueType is None:
+        raise Exception("ValueType not provided")
+    if valueType not in ["hourly","daily","yearly"]:
+        raise Exception(f"ValueType [{valueType}] is not supported. The following types are supported: ['hourly', 'daily', 'yearly']")
+    
+    return valueType
+
 def VerifyPath(name, path):
     if not os.path.exists(path):
         raise Exception(f"{name} path does not exist: [{path}]")
     if not path.is_dir():
         raise Exception(f"{name} path is not a folder: [{path}]")
 
-def AddYearlyThresholdValues(path):
+def AddThresholdValues(path, valueType):
     for directory in path.iterdir():
         if not directory.is_dir():
             continue
-        HandleMunicipalityDir(directory)
+        HandleMunicipalityDir(directory, valueType)
 
-def HandleMunicipalityDir(municipalityDir):
+def HandleMunicipalityDir(municipalityDir, valueType):
     for stationDir in municipalityDir.iterdir():
         if stationDir.is_file():
             continue
-        HandleStation(stationDir)
+        HandleStation(stationDir, valueType)
 
 
-def HandleStation(stationPath):
+def HandleStation(stationPath, valueType):
     station = stationPath.name
 
     print(f"{stationPath}")
 
-    
-    station = GetStation(stationPath)
-    components = station["components"]
+    thresholdStation = GetThresholdsStation(stationPath, valueType)
+    yearlyStation = GetYearlyStation(stationPath)
+
+    components = thresholdStation["components"]
     for component in components:
-        for value in component["values"]:
-            AddThreshold(value, component['component'])
+        yearlyComponent = GetOrCreateComponent(yearlyStation, component)
+        for value in component["counts"]:
+            yearlyValue = GetOrCreateValue(yearlyComponent, value["year"])
+            AddThreshold(value, yearlyValue, valueType)
 
     print(f"{stationPath} : {len(components)}")
 
-    OutputStation(stationPath, station)
+    OutputStation(stationPath, yearlyStation)
 
+def GetOrCreateComponent(yearlyStation, component):
+    for yearlyComponent in yearlyStation["components"]:
+        if yearlyComponent["component"] == component["component"]:
+            return yearlyComponent
+    newComponent = {"component": component["component"], "values": []}
+    yearlyStation["components"].append(newComponent)
+    return newComponent
 
-def AddThreshold(value, componentName):
-    year = value["year"]
-    if year == 2019:
-        return
+def GetOrCreateValue(yearlyComponent, year):
+    for yearlyValue in yearlyComponent["values"]:
+        if yearlyValue["year"] == year:
+            return yearlyValue
+    newValue = {"year": year}
+    yearlyValue["values"].append(newValue)
+    return newValue
 
-    thresholds = GetThresholds(componentName, year)
-    if thresholds is None:
-        return
-
-    value["isValid"] = CheckValidity(value)
-
-    numericValue = value['value']
-    value["aboveLowerThreshold"] = "lower" in thresholds and numericValue > thresholds["lower"]
-    value["aboveUpperThreshold"] = "upper" in thresholds and numericValue > thresholds["upper"]
-    value["aboveBoundary"] = numericValue > thresholds["boundary"]
-
-    if value["aboveBoundary"]:
-        print(f"{componentName} -- {year}")
-
-def GetThresholds(componentName, year):
-    for thresholds in ThresholdsList:
-        if (componentName in thresholds) and (year in thresholds["ValidForYears"]):
-            return thresholds[componentName]
-            
-    return None
-
-def CheckValidity(value):
-    if "qualityControlled" in value:
-        return value["qualityControlled"]
+def AddThreshold(value, yearlyValue, valueType):
+    yearlyValue[f"{valueType}LowerCount"] = value["lowerThreshold"]
+    yearlyValue[f"{valueType}UpperCount"] = value["upperThreshold"]
+    yearlyValue[f"{valueType}BoundaryCount"] = value["boundary"]
     
-    if "validHours" in value:
-        requiredHours = MiminumValidHoursLeap if calendar.isleap(value["year"]) else MinimumValidHours
-        return value["validHours"] >= requiredHours
+def GetThresholdsStation(stationPath, valueType):
+    inputPath = os.path.join(stationPath, f"{valueType}_threshold.json")
+    with open(inputPath, mode="r", encoding="utf-8") as inputFile:
+        station = json.load(inputFile)
+    return station
 
-    raise Exception(f"Unable to determine validity: {value}")
-
-
-def GetStation(stationPath):
-    inputPath = os.path.join(stationPath, f"yearly-all.json")
+def GetYearlyStation(stationPath):
+    inputPath = os.path.join(stationPath, f"yearly.json")
     with open(inputPath, mode="r", encoding="utf-8") as inputFile:
         station = json.load(inputFile)
     return station
@@ -123,11 +106,12 @@ def OutputStation(stationPath, station):
 argumentParser = argparse.ArgumentParser()
 argumentParser.add_argument("--settings", "-s", help="provide the output folder")
 argumentParser.add_argument("--path", "-p", help="provide the input folder")
+argumentParser.add_argument("--type", "-t", help="'hourly', 'daily'")
 
 args = argumentParser.parse_args()
 
 settingsPath = GetPathFromArgument("thresholds", args.settings)
 path = GetPathFromArgument("path", args.path)
+valueType = GetValueTypeFromArgument(args.type)
 
-InitializeThresholdList(settingsPath)
-AddYearlyThresholdValues(path)
+AddThresholdValues(path, valueType)
