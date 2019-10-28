@@ -8,7 +8,7 @@ from dateutil.parser import parse
 from time import time
 from datetime import timedelta
 
-CurrentHourFraction = 1.0
+PreviousWeirdComponent = ""
 
 def GetPathFromArgument(argName, argValue):
     if argValue is None:
@@ -37,7 +37,7 @@ def HandleMunicipalityDir(municipalityDir):
 
 def HandleStation(entry):
     valuePath = os.path.join(entry, f"hourly.json")
-    outputPath = os.path.join(entry, f"yearly.json")
+    outputPath = os.path.join(entry, f"yearly-non-metal.json")
     countStation = {}
 
     print(outputPath)
@@ -65,7 +65,7 @@ def HandleComponent(component):
         UpdateMean(yearlyMeans, value, componentName)
     
     if len(yearlyMeans) > 0:
-        yearlyComp = {"component": componentName, "values": []}
+        yearlyComp = {"component": componentName, "unit": component['unit'], "values": []}
         yearlyComp["values"].extend(yearlyMeans.values())
         
     return yearlyComp
@@ -77,19 +77,14 @@ def UpdateMean(counts, value, componentName):
         return
 
     if not year in counts:
-        counts[year] = {"year":year, "validHours": 0, "aggregated": 0, "mean": 0}
+        counts[year] = {"year":year, "validHours": 0, "aggregated": 0, "value": 0}
 
-    hourFraction = GetTimestepFraction(value)
+    hourFraction = GetTimestepFraction(value, componentName)
     valueFraction = value['value'] * hourFraction
 
     counts[year]["validHours"] += hourFraction
     counts[year]["aggregated"] += valueFraction
-    counts[year]["mean"] = counts[year]['aggregated'] / counts[year]["validHours"]
-
-    global CurrentHourFraction
-    if hourFraction != CurrentHourFraction:
-        CurrentHourFraction = hourFraction
-        print(f"---- {hourFraction} ---- {valueFraction}")
+    counts[year]["value"] = counts[year]['aggregated'] / counts[year]["validHours"]
 
 def GetYear(value):
     dateString = None
@@ -104,11 +99,17 @@ def GetYear(value):
 def ValidateValue(value):
     return value["qualityControlled"] == True
 
-def GetTimestepFraction(value):
+def GetTimestepFraction(value, componentName):
     timestep = value['timestep']
 
     if timestep > 3600:
         raise Exception(f"Timestep larger than on hour: {timestep}")
+
+    if timestep != 3600:
+        global PreviousWeirdComponent
+        if componentName != PreviousWeirdComponent:
+            PreviousWeirdComponent = componentName
+            print(f"---- {componentName} ---- {timestep}")
 
     return timestep/3600
     

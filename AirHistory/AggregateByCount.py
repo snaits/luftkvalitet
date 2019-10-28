@@ -5,6 +5,8 @@ import os
 import os.path
 from pathlib import Path
 from dateutil.parser import parse
+from time import time
+from datetime import timedelta
 
 ThresholdsList = []
 MinCoverage = 100
@@ -58,6 +60,9 @@ def HandleStation(entry, valueType):
     valuePath = os.path.join(entry, f"{valueType}.json")
     outputPath = os.path.join(entry, f"{valueType}_threshold.json")
     countStation = {}
+
+    print(outputPath)
+    startTime = time()
     with open(valuePath, mode="r", encoding="utf-8") as inputFile:
         valStation = json.load(inputFile)
         countStation = valStation.copy()
@@ -67,9 +72,11 @@ def HandleStation(entry, valueType):
             if not countComponent is None:
                 countStation['components'].append(countComponent)
 
-    print(outputPath)
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
         json.dump(countStation, outputFile)
+
+    duration = time() - startTime
+    print(timedelta(seconds=duration).total_seconds())
 
 def HandleComponent(component, valueType):
     componentName = component["component"]
@@ -80,7 +87,7 @@ def HandleComponent(component, valueType):
         UpdateCount(counts, value, componentName, valueType)
     
     if len(counts) > 0:
-        countComp = {"component": componentName, "counts": []}
+        countComp = {"component": componentName, "unit": component["unit"], "counts": []}
         countComp["counts"].extend(counts.values())
         
     return countComp
@@ -115,6 +122,10 @@ def GetYear(value):
         dateString = value['dateTime']
     elif 'fromTime' in value:
         dateString = value['fromTime']
+    elif 'year' in value:
+        return value['year']
+    else:
+        raise Exception(f"Unable to find date in value: {value}")
 
     startDate = parse(dateString)
     return startDate.year
@@ -124,10 +135,12 @@ def ValidateValue(value, valueType):
 
     if valueType == "hourly" and value["qualityControlled"] == False:
         return False
+    if valueType == "hourly" and value["timestep"] != 3600:
+        raise Exception(f"Incorrect timestep found in value: {value}")
     if valueType == "daily" and value["coverage"] < MinCoverage:
         MinCoverage = value["coverage"]
     if valueType == "daily" and value["coverage"] < 85:
-        print(f"################  Invalid coverage: {value['coverage']} ################")
+        #print(f"################  Invalid coverage: {value['coverage']} ################")
         return False
 
     return True
