@@ -13,7 +13,7 @@ dateFormat = "%Y-%m-%d"
 
 currentDate = datetime.datetime.now()
 month = relativedelta(months=+1)
-startDate = datetime.datetime(2016,2,1)
+startDate = datetime.datetime(2008,1,1)
 
 if not os.path.exists(dirPath):
     os.mkdir(dirPath)
