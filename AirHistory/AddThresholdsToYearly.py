@@ -32,26 +32,24 @@ def VerifyPath(name, path):
     if not path.is_dir():
         raise Exception(f"{name} path is not a folder: [{path}]")
 
-def AddThresholdValues(path, valueType):
+def AddThresholdValues(path, valueType, inputFileName, outputFileName):
     for directory in path.iterdir():
         if not directory.is_dir():
             continue
-        HandleMunicipalityDir(directory, valueType)
+        HandleMunicipalityDir(directory, valueType, inputFileName, outputFileName)
 
-def HandleMunicipalityDir(municipalityDir, valueType):
+def HandleMunicipalityDir(municipalityDir, valueType, inputFileName, outputFileName):
     for stationDir in municipalityDir.iterdir():
         if stationDir.is_file():
             continue
-        HandleStation(stationDir, valueType)
+        HandleStation(stationDir, valueType, inputFileName, outputFileName)
 
 
-def HandleStation(stationPath, valueType):
-    station = stationPath.name
-
+def HandleStation(stationPath, valueType, inputFileName, outputFileName):
     print(f"{stationPath}")
 
     thresholdStation = GetThresholdsStation(stationPath, valueType)
-    yearlyStation = GetYearlyStation(stationPath)
+    yearlyStation = GetYearlyStation(stationPath, inputFileName)
 
     components = thresholdStation["components"]
     for component in components:
@@ -62,7 +60,7 @@ def HandleStation(stationPath, valueType):
 
     print(f"{stationPath} : {len(components)}")
 
-    OutputStation(stationPath, yearlyStation)
+    OutputStation(stationPath, yearlyStation, outputFileName)
 
 def GetOrCreateComponent(yearlyStation, component):
     for yearlyComponent in yearlyStation["components"]:
@@ -91,27 +89,31 @@ def GetThresholdsStation(stationPath, valueType):
         station = json.load(inputFile)
     return station
 
-def GetYearlyStation(stationPath):
-    inputPath = os.path.join(stationPath, f"yearly.json")
+def GetYearlyStation(stationPath, inputFileName):
+    inputPath = os.path.join(stationPath, inputFileName)
     with open(inputPath, mode="r", encoding="utf-8") as inputFile:
         station = json.load(inputFile)
     return station
 
-def OutputStation(stationPath, station):
-    outputPath = os.path.join(stationPath, f"yearly.json")
+def OutputStation(stationPath, station, outputFileName):
+    outputPath = os.path.join(stationPath, outputFileName)
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
         json.dump(station, outputFile)
 
 
 argumentParser = argparse.ArgumentParser()
 argumentParser.add_argument("--settings", "-s", help="provide the output folder")
-argumentParser.add_argument("--path", "-p", help="provide the input folder")
+argumentParser.add_argument("--path", "-p", help="provide the folder containing all station folders")
+argumentParser.add_argument("--inputfile", "-i", help="provide the name of the yearly input files")
+argumentParser.add_argument("--outputfile", "-o", help="provide the name of the yearly output files")
 argumentParser.add_argument("--type", "-t", help="'hourly', 'daily'")
 
 args = argumentParser.parse_args()
 
 settingsPath = GetPathFromArgument("thresholds", args.settings)
 path = GetPathFromArgument("path", args.path)
+inputFileName = args.inputfile
+outputFileName = args.outputfile
 valueType = GetValueTypeFromArgument(args.type)
 
-AddThresholdValues(path, valueType)
+AddThresholdValues(path, valueType, inputFileName, outputFileName)

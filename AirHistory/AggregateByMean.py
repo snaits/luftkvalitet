@@ -23,21 +23,21 @@ def VerifyPath(name, path):
     if not path.is_dir():
         raise Exception(f"{name} path is not a folder: [{path}]")
 
-def AggregateByMean(path):
+def AggregateByMean(path, outputFileName):
     for directory in path.iterdir():
         if not directory.is_dir():
             continue
-        HandleMunicipalityDir(directory)
+        HandleMunicipalityDir(directory, outputFileName)
 
-def HandleMunicipalityDir(municipalityDir):
+def HandleMunicipalityDir(municipalityDir, outputFileName):
     for stationDir in municipalityDir.iterdir():
         if stationDir.is_file():
             continue
-        HandleStation(stationDir)
+        HandleStation(stationDir, outputFileName)
 
-def HandleStation(entry):
-    valuePath = os.path.join(entry, f"hourly.json")
-    outputPath = os.path.join(entry, f"yearly-non-metal.json")
+def HandleStation(entry, outputFileName):
+    valuePath = os.path.join(entry, "hourly_deduped.json")
+    outputPath = os.path.join(entry, outputFileName)
     countStation = {}
 
     print(outputPath)
@@ -118,10 +118,12 @@ def EnsurePathExists(dirPath):
         os.mkdir(dirPath)
 
 argumentParser = argparse.ArgumentParser()
-argumentParser.add_argument("--path", "-p", help="provide the input folder")
+argumentParser.add_argument("--path", "-p", help="provide the folder containing all station folders")
+argumentParser.add_argument("--outputfile", "-o", help="provide the name of the output files")
 
 args = argumentParser.parse_args()
 
 path = GetPathFromArgument("path", args.path)
+outputFileName = args.outputfile
 
-AggregateByMean(path)
+AggregateByMean(path, outputFileName)

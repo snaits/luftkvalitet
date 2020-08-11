@@ -61,6 +61,7 @@ def AggregateValuesByStation(inputPath, outputPath, valueType):
 
 def HandleFile(path):
     data = []
+    print(f"path: {path.absolute()}")
     #with open(path.absolute(), mode="r", encoding="iso-8859-1") as inputFile:
     with open(path.absolute(), mode="r", encoding="utf-8") as inputFile:
         data = json.load(inputFile)

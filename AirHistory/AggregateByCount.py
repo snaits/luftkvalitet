@@ -57,7 +57,7 @@ def HandleMunicipalityDir(municipalityDir, valueType):
         HandleStation(stationDir, valueType)
 
 def HandleStation(entry, valueType):
-    valuePath = os.path.join(entry, f"{valueType}.json")
+    valuePath = os.path.join(entry, f"{valueType}_deduped.json")
     outputPath = os.path.join(entry, f"{valueType}_threshold.json")
     countStation = {}
 
@@ -104,16 +104,23 @@ def UpdateCount(counts, value, componentName, valueType):
 
     if not ValidateValue(value, valueType):
         return
+
+    if valueType == "hourly" and counts[year]["validValues"] == 8760:
+        raise Exception(f"Found more than 8760 hourly values in year {year}")
+
+    if valueType == "daily" and counts[year]["validValues"] == 365:
+        raise Exception(f"Found more than 365 daily values in year {year}")
+
     counts[year]["validValues"] += 1
 
     val = value['value']
-    if "lower" in thresholds and val > thresholds["lower"]:
+    if "lower" in thresholds and val >= thresholds["lower"]:
         counts[year]["lowerThreshold"] += 1
 
-    if "upper" in thresholds and val > thresholds["upper"]:
+    if "upper" in thresholds and val >= thresholds["upper"]:
         counts[year]["upperThreshold"] += 1
         
-    if val > thresholds["boundary"]:
+    if val >= thresholds["boundary"]:
         counts[year]["boundary"] += 1
 
 def GetYear(value):
@@ -139,7 +146,7 @@ def ValidateValue(value, valueType):
         raise Exception(f"Incorrect timestep found in value: {value}")
     if valueType == "daily" and value["coverage"] < MinCoverage:
         MinCoverage = value["coverage"]
-    if valueType == "daily" and value["coverage"] < 85:
+    if valueType == "daily" and value["coverage"] < 75:
         #print(f"################  Invalid coverage: {value['coverage']} ################")
         return False
 

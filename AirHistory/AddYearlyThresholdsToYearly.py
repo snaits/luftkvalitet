@@ -41,34 +41,31 @@ def VerifyPath(name, path):
     if not path.is_dir():
         raise Exception(f"{name} path is not a folder: [{path}]")
 
-def AddYearlyThresholdValues(path):
+def AddYearlyThresholdValues(path, inputFileName, outputFileName):
     for directory in path.iterdir():
         if not directory.is_dir():
             continue
-        HandleMunicipalityDir(directory)
+        HandleMunicipalityDir(directory, inputFileName, outputFileName)
 
-def HandleMunicipalityDir(municipalityDir):
+def HandleMunicipalityDir(municipalityDir, inputFileName, outputFileName):
     for stationDir in municipalityDir.iterdir():
         if stationDir.is_file():
             continue
-        HandleStation(stationDir)
+        HandleStation(stationDir, inputFileName, outputFileName)
 
 
-def HandleStation(stationPath):
-    station = stationPath.name
+def HandleStation(stationDir, inputFileName, outputFileName):
+    print(f"{stationDir}")
 
-    print(f"{stationPath}")
-
-    
-    station = GetStation(stationPath)
+    station = GetStation(stationDir, inputFileName)
     components = station["components"]
     for component in components:
         for value in component["values"]:
             AddThreshold(value, component['component'])
 
-    print(f"{stationPath} : {len(components)}")
+    print(f"{stationDir} : {len(components)}")
 
-    OutputStation(stationPath, station)
+    OutputStation(station, stationDir, outputFileName)
 
 
 def AddThreshold(value, componentName):
@@ -76,11 +73,11 @@ def AddThreshold(value, componentName):
     if year == 2019:
         return
 
+    value["isValid"] = CheckValidity(value)
+
     thresholds = GetThresholds(componentName, year)
     if thresholds is None:
         return
-
-    value["isValid"] = CheckValidity(value)
 
     numericValue = value['value']
     value["aboveLowerThreshold"] = "lower" in thresholds and numericValue > thresholds["lower"]
@@ -108,26 +105,30 @@ def CheckValidity(value):
     raise Exception(f"Unable to determine validity: {value}")
 
 
-def GetStation(stationPath):
-    inputPath = os.path.join(stationPath, f"yearly-all.json")
+def GetStation(stationPath, inputFileName):
+    inputPath = os.path.join(stationPath, inputFileName)
     with open(inputPath, mode="r", encoding="utf-8") as inputFile:
         station = json.load(inputFile)
     return station
 
-def OutputStation(stationPath, station):
-    outputPath = os.path.join(stationPath, f"yearly.json")
+def OutputStation(station, stationDir, outputFileName):
+    outputPath = os.path.join(stationDir, outputFileName)
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
         json.dump(station, outputFile)
 
 
 argumentParser = argparse.ArgumentParser()
 argumentParser.add_argument("--settings", "-s", help="provide the output folder")
-argumentParser.add_argument("--path", "-p", help="provide the input folder")
+argumentParser.add_argument("--path", "-p", help="provide the folder containing all station folders")
+argumentParser.add_argument("--inputfile", "-i", help="provide the name of the input files")
+argumentParser.add_argument("--outputfile", "-o", help="provide the name of the output files")
 
 args = argumentParser.parse_args()
 
 settingsPath = GetPathFromArgument("thresholds", args.settings)
 path = GetPathFromArgument("path", args.path)
+inputFileName = args.inputfile
+outputFileName = args.outputfile
 
 InitializeThresholdList(settingsPath)
-AddYearlyThresholdValues(path)
+AddYearlyThresholdValues(path, inputFileName, outputFileName)
