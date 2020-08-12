@@ -7,30 +7,10 @@ from pathlib import Path
 from dateutil.parser import parse
 from time import time
 from datetime import timedelta
+from AirHistoryUtilities import GetPathFromArgument, GetValueTypeFromArgument
 
 ThresholdsList = []
 MinCoverage = 100
-
-def GetPathFromArgument(argName, argValue):
-    if argValue is None:
-        raise Exception(f"{argName} path not provided")
-    argPath = Path(argValue)
-    VerifyPath(argName, argPath)
-    return argPath
-
-def VerifyPath(name, path):
-    if not os.path.exists(path):
-        raise Exception(f"{name} path does not exist: [{path}]")
-    if not path.is_dir():
-        raise Exception(f"{name} path is not a folder: [{path}]")
-
-def GetValueTypeFromArgument(valueType):
-    if valueType is None:
-        raise Exception("ValueType not provided")
-    if valueType not in ["hourly","daily","yearly"]:
-        raise Exception(f"ValueType [{valueType}] is not supported. The following types are supported: ['hourly', 'daily', 'yearly']")
-    
-    return valueType
 
 def InitializeThresholdList(settingsPath, valueType):
     thresholdsPath = os.path.join(settingsPath.absolute(), f"thresholds_{valueType}.json")
@@ -158,10 +138,6 @@ def GetThresholds(componentName, year):
             return thresholds[componentName]
             
     return None
-
-def EnsurePathExists(dirPath):
-    if not os.path.exists(dirPath):
-        os.mkdir(dirPath)
 
 argumentParser = argparse.ArgumentParser()
 argumentParser.add_argument("--path", "-p", help="provide the input folder")

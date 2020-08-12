@@ -7,21 +7,9 @@ from pathlib import Path
 from dateutil.parser import parse
 from time import time
 from datetime import timedelta
+from AirHistoryUtilities import GetPathFromArgument
 
 PreviousWeirdComponent = ""
-
-def GetPathFromArgument(argName, argValue):
-    if argValue is None:
-        raise Exception(f"{argName} path not provided")
-    argPath = Path(argValue)
-    VerifyPath(argName, argPath)
-    return argPath
-
-def VerifyPath(name, path):
-    if not os.path.exists(path):
-        raise Exception(f"{name} path does not exist: [{path}]")
-    if not path.is_dir():
-        raise Exception(f"{name} path is not a folder: [{path}]")
 
 def AggregateByMean(path, outputFileName):
     for directory in path.iterdir():
@@ -113,10 +101,6 @@ def GetTimestepFraction(value, componentName):
 
     return timestep/3600
     
-def EnsurePathExists(dirPath):
-    if not os.path.exists(dirPath):
-        os.mkdir(dirPath)
-
 argumentParser = argparse.ArgumentParser()
 argumentParser.add_argument("--path", "-p", help="provide the folder containing all station folders")
 argumentParser.add_argument("--outputfile", "-o", help="provide the name of the output files")

@@ -1,3 +1,4 @@
+import argparse
 import json
 import requests
 import datetime
@@ -5,35 +6,60 @@ import os
 import os.path
 from pathlib import Path
 from dateutil.relativedelta import relativedelta
+from AirHistoryUtilities import GetPathFromArgument
 
-dirPath = Path('output')
 dateFormat = "%Y-%m-%d"
 
-currentDate = datetime.datetime.now()
-month = relativedelta(months=+1)
-startDate = datetime.datetime(2008,1,1)
+def GetStartDate(inputDate):
+    if inputDate is None:
+        return datetime.datetime(2008,1,1)
 
-if not os.path.exists(dirPath):
-    os.mkdir(dirPath)
+    return datetime.datetime.strptime(inputDate, dateFormat)
 
-while startDate < currentDate:
-    endDate = startDate + month
+def GetMeasurements(startDate, dirPath, isHourly):
+    currentDate = datetime.datetime.now()
+    month = relativedelta(months=+1)
 
-    url = f'https://api.nilu.no/stats/day/{startDate.strftime(dateFormat)}/{endDate.strftime(dateFormat)}/all'
-    print(url)
+    fileNamePprefix = "døgnmiddel"
+    urlPath = "stats/day"
 
-    response = requests.get(url)
-    response.raise_for_status()
+    if isHourly:
+        fileNamePprefix = "timesmiddel"
+        urlPath = "aq/historical"
 
-    contents = response.text
+    if not os.path.exists(dirPath):
+        os.mkdir(dirPath)
 
-    fileName = f'døgnmiddel-{startDate.strftime(dateFormat)}.json'
-    filePath = os.path.join(dirPath, fileName)
+    while startDate < currentDate:
+        endDate = startDate + month
 
-    with open(filePath, mode="w", encoding="utf-8") as file: 
-        file.write(contents)
+        url = f'https://api.nilu.no/{urlPath}/{startDate.strftime(dateFormat)}/{endDate.strftime(dateFormat)}/all'
+        
+        fileName = f'{fileNamePprefix}-{startDate.strftime(dateFormat)}.json'
+        filePath = os.path.join(dirPath, fileName)
+        startDate = endDate
 
-    startDate = endDate
+        if os.path.exists(filePath):
+            print(f'{filePath} already exists. Skipping.')
+            continue
 
+        print(f'Downloading [{url}] to [{filePath}].')
 
+        response = requests.get(url)
+        response.raise_for_status()
+        contents = response.text
 
+        with open(filePath, mode="w", encoding="utf-8") as file: 
+            file.write(contents)
+
+argumentParser = argparse.ArgumentParser()
+argumentParser.add_argument("--outputpath", "-o", help="provide the output folder.")
+argumentParser.add_argument("--startdate", "-s", help="provide the output folder in the format %Y-%m-%d")
+argumentParser.add_argument("--hourly", "-t", action='store_true', help="a flag indicating that the hourly measurements should be retrieved instead of the daily.")
+
+args = argumentParser.parse_args()
+
+startDate = GetStartDate(args.startdate)
+path = GetPathFromArgument("path", args.outputpath, False, True)
+
+GetMeasurements(startDate, path, args.hourly)

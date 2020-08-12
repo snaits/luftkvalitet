@@ -8,6 +8,7 @@ from pathlib import Path
 from dateutil.parser import parse
 from time import time
 from datetime import timedelta
+from AirHistoryUtilities import GetPathFromArgument
 
 MetalValues = []
 
@@ -20,24 +21,7 @@ def InitializeMetalValues(path):
             for field in reader.fieldnames:
                 value[field] = row[field]
             MetalValues.append(value)
-                
-
-def GetPathFromArgument(argName, argValue, isFileExpected = False):
-    if argValue is None:
-        raise Exception(f"{argName} path not provided")
-
-    argPath = Path(argValue)
-    VerifyPath(argName, argPath, isFileExpected)
-    return argPath
-
-def VerifyPath(name, path, isFileExpected):
-    if not os.path.exists(path):
-        raise Exception(f"{name} path does not exist: [{path}]")
-    if (not isFileExpected) and not path.is_dir():
-        raise Exception(f"{name} path is not a folder: [{path}]")
-    if isFileExpected and not path.is_file():
-        raise Exception(f"{name} path is not a file: [{path}]")
-
+            
 def AddYearlyMetalValues(path, inputFileName, outputFileName):
     for directory in path.iterdir():
         if not directory.is_dir():

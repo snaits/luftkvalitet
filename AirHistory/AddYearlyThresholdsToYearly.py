@@ -9,13 +9,12 @@ from pathlib import Path
 from dateutil.parser import parse
 from time import time
 from datetime import timedelta
-
+from AirHistoryUtilities import GetPathFromArgument
 
 ThresholdsList = []
 
 MinimumValidHours = 7403
 MiminumValidHoursLeap = 7423
-
 
 def InitializeThresholdList(settingsPath):
     thresholdsPath = os.path.join(settingsPath.absolute(), f"thresholds_yearly.json")
@@ -27,19 +26,6 @@ def InitializeThresholdList(settingsPath):
         
     if len(ThresholdsList) == 0:
         raise Exception(f"Threshold file empty: [{thresholdsPath}]")
-
-def GetPathFromArgument(argName, argValue):
-    if argValue is None:
-        raise Exception(f"{argName} path not provided")
-    argPath = Path(argValue)
-    VerifyPath(argName, argPath)
-    return argPath
-
-def VerifyPath(name, path):
-    if not os.path.exists(path):
-        raise Exception(f"{name} path does not exist: [{path}]")
-    if not path.is_dir():
-        raise Exception(f"{name} path is not a folder: [{path}]")
 
 def AddYearlyThresholdValues(path, inputFileName, outputFileName):
     for directory in path.iterdir():
@@ -115,7 +101,6 @@ def OutputStation(station, stationDir, outputFileName):
     outputPath = os.path.join(stationDir, outputFileName)
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
         json.dump(station, outputFile)
-
 
 argumentParser = argparse.ArgumentParser()
 argumentParser.add_argument("--settings", "-s", help="provide the output folder")
