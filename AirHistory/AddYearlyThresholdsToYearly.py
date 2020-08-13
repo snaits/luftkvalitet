@@ -56,8 +56,6 @@ def HandleStation(stationDir, inputFileName, outputFileName):
 
 def AddThreshold(value, componentName):
     year = value["year"]
-    if year == 2019:
-        return
 
     value["isValid"] = CheckValidity(value)
 
