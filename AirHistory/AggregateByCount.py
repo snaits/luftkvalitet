@@ -7,6 +7,7 @@ from pathlib import Path
 from dateutil.parser import parse
 from time import time
 from datetime import timedelta
+import calendar
 from AirHistoryUtilities import GetPathFromArgument, GetValueTypeFromArgument
 
 ThresholdsList = []
@@ -74,6 +75,8 @@ def HandleComponent(component, valueType):
 
 def UpdateCount(counts, value, componentName, valueType):
     year = GetYear(value)
+    daysInYear = 366 if calendar.isleap(year) else 365
+    hoursInYear = 8784  if calendar.isleap(year) else 8760
 
     thresholds = GetThresholds(componentName, year)
     if thresholds is None:
@@ -85,10 +88,10 @@ def UpdateCount(counts, value, componentName, valueType):
     if not ValidateValue(value, valueType):
         return
 
-    if valueType == "hourly" and counts[year]["validValues"] == 8760:
+    if valueType == "hourly" and counts[year]["validValues"] == hoursInYear:
         raise Exception(f"Found more than 8760 hourly values in year {year}")
 
-    if valueType == "daily" and counts[year]["validValues"] == 365:
+    if valueType == "daily" and counts[year]["validValues"] == daysInYear:
         raise Exception(f"Found more than 365 daily values in year {year}")
 
     counts[year]["validValues"] += 1
