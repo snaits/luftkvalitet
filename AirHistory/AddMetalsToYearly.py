@@ -52,8 +52,11 @@ def HandleStation(stationPath, inputFileName, outputFileName):
 def FindStationMetalValues(station):
     stationValues = []
     for metalValue in MetalValues:
-        if metalValue["Stasjon"] == station:
-            stationValues.append(metalValue)
+        try:
+            if metalValue["Stasjon"] == station:
+                stationValues.append(metalValue)
+        except KeyError:
+            print("key error" + str(metalValue))
             
 
     return stationValues

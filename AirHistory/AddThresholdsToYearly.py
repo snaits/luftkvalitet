@@ -34,6 +34,9 @@ def HandleStation(stationPath, valueType, inputFileName, outputFileName):
     for component in components:
         yearlyComponent = GetOrCreateComponent(yearlyStation, component)
         for value in component["counts"]:
+            print(f"{value}")
+            if value["year"] == 2008:
+                continue
             yearlyValue = GetOrCreateValue(yearlyComponent, value["year"])
             AddThreshold(value, yearlyValue, valueType)
 
