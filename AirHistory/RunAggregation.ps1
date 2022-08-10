@@ -1,4 +1,4 @@
-$startDate = "2020-01-01"
+$startDate = "2008-01-01"
 
 Write-Host -ForegroundColor Green "`r`nRunning GetStationMeasurements for daily measurements."
 python.exe GetStationMeasurements.py --startdate $startDate --outputpath ./daily
