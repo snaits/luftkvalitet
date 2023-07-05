@@ -18,5 +18,10 @@
     "ValidForYears": [2016,2017,2018,2019,2020,2021],
     "PM10": {"lower": 20.5, "upper": 22.5, "boundary": 25.5},
     "PM2.5": {"lower": 10.5, "upper": 12.5, "boundary": 15.5}
+    },
+	{
+    "ValidForYears": [2022],
+    "PM10": {"lower": 15.5, "upper": 17.5, "boundary": 20.5},
+    "PM2.5": {"lower": 5.5, "upper": 7.5, "boundary": 10.5}
     }
 ]   
