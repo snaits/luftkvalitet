@@ -1,12 +1,12 @@
 $startDate = "2012-01-01"
 
-Write-Host -ForegroundColor Green "`r`nRunning GetStationMeasurements for daily measurements."
-python.exe GetStationMeasurements.py --startdate $startDate --outputpath ./daily
-if(-not $?){throw "GetStationMeasurements daily failed with exit code: $LastExitCode"}
+# Write-Host -ForegroundColor Green "`r`nRunning GetStationMeasurements for daily measurements."
+# python.exe GetStationMeasurements.py --startdate $startDate --outputpath ./daily
+# if(-not $?){throw "GetStationMeasurements daily failed with exit code: $LastExitCode"}
 
-Write-Host -ForegroundColor Green "`r`nRunning GetStationMeasurements for hourly measurements."
-python.exe GetStationMeasurements.py --hourly --startdate $startDate --outputpath ./hourly
-if(-not $?){throw "GetStationMeasurements hourly failed with exit code: $LastExitCode"}
+# Write-Host -ForegroundColor Green "`r`nRunning GetStationMeasurements for hourly measurements."
+# python.exe GetStationMeasurements.py --hourly --startdate $startDate --outputpath ./hourly
+# if(-not $?){throw "GetStationMeasurements hourly failed with exit code: $LastExitCode"}
 
 Write-Host -ForegroundColor Green "`r`nRunning AggregateByStation on daily."
 python.exe AggregateByStation.py --type daily --input ./daily --output ./output --municipalities ./settings/municipalities.json

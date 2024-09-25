@@ -29,6 +29,9 @@ def HandleStation(entry, valueType):
     dedupedStation = {}
     newComponents = {}
     valueDeduper = {}
+    
+    if not os.path.isfile(valuePath):
+        return
 
     print(outputPath)
     startTime = time()

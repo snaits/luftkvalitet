@@ -1,0 +1,394 @@
+  {
+  "municipality": "Kristiansand",
+  "municipalityNumber": "1001",
+  "station": "Hennig Olsen",
+  "components": [
+    {
+      "component": "As",
+      "unit": "ng/m³",
+      "values": [
+        {
+          "year": 2009,
+          "qualityControlled": true,
+          "value": 1.1,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2010,
+          "qualityControlled": false,
+          "value": 0,
+          "isValid": false,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2011,
+          "qualityControlled": true,
+          "value": 1.4,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2012,
+          "qualityControlled": true,
+          "value": 2.3,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2013,
+          "qualityControlled": true,
+          "value": 1.5,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2014,
+          "qualityControlled": true,
+          "value": 1.9,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2015,
+          "qualityControlled": true,
+          "value": 0.9,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2016,
+          "qualityControlled": true,
+          "value": 1.5,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2017,
+          "qualityControlled": true,
+          "value": 1.4,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2018,
+          "qualityControlled": true,
+          "value": 1.6,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+           },
+        {
+          "year": 2019,
+          "qualityControlled": true,
+          "value": 1.1,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2020,
+          "qualityControlled": true,
+          "value": 0.7,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2021,
+          "qualityControlled": true,
+          "value": 0.7,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2022,
+          "qualityControlled": true,
+          "value": 0.6,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        }
+      ]
+  },
+  {
+      "component": "Ni",
+      "unit": "ng/m³",
+      "values": [
+        {
+          "year": 2009,
+          "qualityControlled": true,
+          "value": 28.7,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2010,
+          "qualityControlled": false,
+          "value": 0,
+          "isValid": false,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2011,
+          "qualityControlled": true,
+          "value": 18.9,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2012,
+          "qualityControlled": true,
+          "value": 22.6,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2013,
+          "qualityControlled": true,
+          "value": 30.1,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2014,
+          "qualityControlled": true,
+          "value": 48,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2015,
+          "qualityControlled": true,
+          "value": 24.1,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2016,
+          "qualityControlled": true,
+          "value": 35,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2017,
+          "qualityControlled": true,
+          "value": 25,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2018,
+          "qualityControlled": true,
+          "value": 21,
+          "isValid": true,
+         "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+          },
+        {
+          "year": 2019,
+          "qualityControlled": true,
+          "value": 28,
+          "isValid": true,
+         "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2020,
+          "qualityControlled": true,
+          "value": 9,
+          "isValid": true,
+         "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2021,
+          "qualityControlled": true,
+          "value": 24,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        },
+        {
+          "year": 2022,
+          "qualityControlled": true,
+          "value": 14,
+          "isValid": true,
+          "aboveLowerThreshold": true,
+          "aboveUpperThreshold": true,
+          "aboveBoundary": true
+        }
+      ]
+  },
+  {     
+ "component": "Cd",
+      "unit": "ng/m³",
+      "values": [
+        {
+          "year": 2009,
+          "qualityControlled": true,
+          "value": 0.32,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2011,
+          "qualityControlled": true,
+          "value": 0.06,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2012,
+          "qualityControlled": true,
+          "value": 0.04,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2013,
+          "qualityControlled": true,
+          "value": 0.06,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2014,
+          "qualityControlled": true,
+          "value": 0.07,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2015,
+          "qualityControlled": true,
+          "value": 0.04,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2016,
+          "qualityControlled": true,
+          "value": 0.04,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2017,
+          "qualityControlled": true,
+          "value": 0.06,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2018,
+          "qualityControlled": true,
+          "value": 0.05,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+ },
+        {
+          "year": 2019,
+          "qualityControlled": true,
+          "value": 0.05,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2020,
+          "qualityControlled": true,
+          "value": 0.04,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2021,
+          "qualityControlled": true,
+          "value": 0.05,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        },
+        {
+          "year": 2022,
+          "qualityControlled": true,
+          "value": 0.06,
+          "isValid": true,
+          "aboveLowerThreshold": false,
+          "aboveUpperThreshold": false,
+          "aboveBoundary": false
+        }
+      ]
+    }
+  ]
+} 
