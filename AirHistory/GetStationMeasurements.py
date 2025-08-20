@@ -30,7 +30,7 @@ def GetMeasurements(startDate, dirPath, isHourly):
     if not os.path.exists(dirPath):
         os.mkdir(dirPath)
 
-    while startDate < datetime.datetime(2023,1,1):
+    while startDate < datetime.datetime(2025,1,1):  #don't fetch data newer than this 
         endDate = startDate + month
 
         url = f'https://api.nilu.no/{urlPath}/{startDate.strftime(dateFormat)}/{endDate.strftime(dateFormat)}/all'
