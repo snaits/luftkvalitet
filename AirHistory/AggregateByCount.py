@@ -1,5 +1,5 @@
 import argparse
-import json
+import orjson
 import datetime
 import os
 import os.path
@@ -10,62 +10,73 @@ from datetime import timedelta
 import calendar
 from AirHistoryUtilities import GetPathFromArgument, GetValueTypeFromArgument
 
-ThresholdsList = []
 MinCoverage = 100
 
 def InitializeThresholdList(settingsPath, valueType):
-    thresholdsPath = os.path.join(settingsPath.absolute(), f"thresholds_{valueType}.json")
-    if not os.path.exists(thresholdsPath):
-        raise Exception(f"Threshold file not found: [{thresholdsPath}]")
+    thresholdsPath = settingsPath / f"thresholds_{valueType}.json"
+    with open(thresholdsPath, "r", encoding="utf-8") as inputFile:
+        raw_thresholds = orjson.loads(inputFile.read())
 
-    with open(thresholdsPath, mode="r", encoding="utf-8") as inputFile:
-        ThresholdsList.extend(json.load(inputFile))
-        
-    if len(ThresholdsList) == 0:
-        raise Exception(f"Threshold file empty: [{thresholdsPath}]")
+    global ThresholdMap
+    ThresholdMap = {}
+    for entry in raw_thresholds:
+        for component, values in entry.items():
+            if component != "ValidForYears":
+                for year in entry["ValidForYears"]:
+                    ThresholdMap[(component, year)] = values
     
-def AggregateByThreshold(path, valueType):
-    for directory in path.iterdir():
-        if not directory.is_dir():
-            continue
-        HandleMunicipalityDir(directory, valueType)
-    print(f"MinCoverage: {MinCoverage}")
+    return ThresholdMap     
 
-def HandleMunicipalityDir(municipalityDir, valueType):
+from concurrent.futures import ProcessPoolExecutor
+
+def AggregateByThreshold(path, valueType, thresholds_totals):
+    with ProcessPoolExecutor() as executor:
+        futures = [
+            executor.submit(HandleMunicipalityDir, directory, valueType, thresholds_totals)
+            for directory in path.iterdir() if directory.is_dir()
+        ]
+        for future in futures:
+            future.result()
+
+def HandleMunicipalityDir(municipalityDir, valueType, thresholds_totals):
     for stationDir in municipalityDir.iterdir():
         if stationDir.is_file():
             continue
-        HandleStation(stationDir, valueType)
+        HandleStation(stationDir, valueType, thresholds_totals)
 
-def HandleStation(entry, valueType):
+def HandleStation(entry, valueType, thresholds_totals):
     valuePath = os.path.join(entry, f"{valueType}_deduped.json")
     outputPath = os.path.join(entry, f"{valueType}_threshold.json")
     countStation = {}
 
+    if(valueType == "hourly"):
+        if("Hennig Olsen" in entry.name or "Holta øst" in entry.name):
+            print("Skipping hourly data for Hennig Olsen and Holta øst")
+            return None
+
     print(outputPath)
     startTime = time()
     with open(valuePath, mode="r", encoding="utf-8") as inputFile:
-        valStation = json.load(inputFile)
-        countStation = valStation.copy()
-        countStation['components'] = []
+        valStation = orjson.loads(inputFile.read())
+        countStation = {'components': [], **{k:v for k,v in valStation.items() if k != 'components'}}
         for component in valStation['components']:
-            countComponent = HandleComponent(component, valueType)
+            countComponent = HandleComponent(component, valueType, thresholds_totals)
             if not countComponent is None:
                 countStation['components'].append(countComponent)
 
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
-        json.dump(countStation, outputFile)
+         outputFile.write(orjson.dumps(countStation).decode())
 
     duration = time() - startTime
     print(timedelta(seconds=duration).total_seconds())
 
-def HandleComponent(component, valueType):
+def HandleComponent(component, valueType, thresholds_totals):
     componentName = component["component"]
     countComp = None
 
     counts = {}
     for value in component['values']:
-        UpdateCount(counts, value, componentName, valueType)
+        UpdateCount(counts, value, componentName, valueType, thresholds_totals)
     
     if len(counts) > 0:
         countComp = {"component": componentName, "unit": component["unit"], "counts": []}
@@ -73,12 +84,13 @@ def HandleComponent(component, valueType):
         
     return countComp
 
-def UpdateCount(counts, value, componentName, valueType):
+def UpdateCount(counts, value, componentName, valueType, thresholds_totals):
     year = GetYear(value)
     daysInYear = 366 if calendar.isleap(year) else 365
     hoursInYear = 8784  if calendar.isleap(year) else 8760
 
-    thresholds = GetThresholds(componentName, year)
+    thresholds = thresholds_totals.get((componentName, year))
+
     if thresholds is None:
         return
 
@@ -134,24 +146,23 @@ def ValidateValue(value, valueType):
         return False
 
     return True
-    
-def GetThresholds(componentName, year):
-    for thresholds in ThresholdsList:
-        if (componentName in thresholds) and (year in thresholds["ValidForYears"]):
-            return thresholds[componentName]
-            
-    return None
 
-argumentParser = argparse.ArgumentParser()
-argumentParser.add_argument("--path", "-p", help="provide the input folder")
-argumentParser.add_argument("--settings", "-s", help="provide the output folder")
-argumentParser.add_argument("--type", "-t", help="'hourly', 'daily' or 'yearly'")
+def main():
+    path = GetPathFromArgument("path", args.path)
+    settingsPath = GetPathFromArgument("thresholds", args.settings)
+    valueType = GetValueTypeFromArgument(args.type)
 
-args = argumentParser.parse_args()
+    thresholds_totals = InitializeThresholdList(settingsPath, valueType)
+    AggregateByThreshold(path, valueType, thresholds_totals )
 
-path = GetPathFromArgument("path", args.path)
-settingsPath = GetPathFromArgument("thresholds", args.settings)
-valueType = GetValueTypeFromArgument(args.type)
+if __name__ == "__main__":
+    import multiprocessing
+    multiprocessing.freeze_support()  # For Windows compatibility
 
-InitializeThresholdList(settingsPath, valueType)
-AggregateByThreshold(path, valueType)
+    argumentParser = argparse.ArgumentParser()
+    argumentParser.add_argument("--path", "-p", help="provide the input folder")
+    argumentParser.add_argument("--settings", "-s", help="provide the output folder")
+    argumentParser.add_argument("--type", "-t", help="'hourly', 'daily' or 'yearly'")
+    args = argumentParser.parse_args()
+
+    main()
