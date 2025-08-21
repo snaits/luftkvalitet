@@ -11,11 +11,12 @@ Oppdaterte lovkrav finnes her:
 ## Oppsett
 Skriptene krever powershell og python 3. 
 
-Python 3 krever også pakkene python-dateutil og requests som du kan installere slik:
+Python 3 krever også noen pakker som du kan installere slik:
 
 ```
 pip install python-dateutil
 pip install requests
+pip install orjson
 ```
 
 
