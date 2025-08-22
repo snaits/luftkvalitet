@@ -30,6 +30,9 @@ def HandleStation(stationPath, valueType, inputFileName, outputFileName):
     thresholdStation = GetThresholdsStation(stationPath, valueType)
     yearlyStation = GetYearlyStation(stationPath, inputFileName)
 
+    if(yearlyStation is None):
+        return
+
     components = thresholdStation["components"]
     for component in components:
         yearlyComponent = GetOrCreateComponent(yearlyStation, component)
@@ -67,12 +70,21 @@ def AddThreshold(value, yearlyValue, valueType):
     
 def GetThresholdsStation(stationPath, valueType):
     inputPath = os.path.join(stationPath, f"{valueType}_threshold.json")
+    inputPath = os.path.join(stationPath, inputFileName)
+    if not os.path.exists(inputPath):
+        print(f"Input file not found: {inputPath}")
+        return None
+
     with open(inputPath, mode="r", encoding="utf-8") as inputFile:
         station = json.load(inputFile)
     return station
 
 def GetYearlyStation(stationPath, inputFileName):
     inputPath = os.path.join(stationPath, inputFileName)
+    if not os.path.exists(inputPath):
+        print(f"Input file not found: {inputPath}")
+        return None
+
     with open(inputPath, mode="r", encoding="utf-8") as inputFile:
         station = json.load(inputFile)
     return station

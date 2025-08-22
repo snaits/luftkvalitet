@@ -28,15 +28,11 @@ def InitializeThresholdList(settingsPath):
         raise Exception(f"Threshold file empty: [{thresholdsPath}]")
 
 def AddYearlyThresholdValues(path, inputFileName, outputFileName):
-    for directory in path.iterdir():
-        if not directory.is_dir():
-            continue
+    for directory in path.glob('*/'):
         HandleMunicipalityDir(directory, inputFileName, outputFileName)
 
 def HandleMunicipalityDir(municipalityDir, inputFileName, outputFileName):
-    for stationDir in municipalityDir.iterdir():
-        if stationDir.is_file():
-            continue
+    for stationDir in municipalityDir.glob("*/"):        
         HandleStation(stationDir, inputFileName, outputFileName)
 
 
@@ -93,7 +89,14 @@ def CheckValidity(value):
 
 
 def GetStation(stationPath, inputFileName):
+
+    print(f"{stationPath}")
     inputPath = os.path.join(stationPath, inputFileName)
+
+    if not os.path.exists(inputPath):
+        print(f"not found path: {inputPath}")
+        return None
+
     with open(inputPath, mode="r", encoding="utf-8") as inputFile:
         station = json.load(inputFile)
     return station

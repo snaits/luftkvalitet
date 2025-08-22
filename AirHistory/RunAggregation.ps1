@@ -53,4 +53,4 @@ python.exe AddThresholdsToYearly.py --path ./output --inputfile yearlyWithDailyT
 if(-not $?){throw "AddThresholdsToYearly hourly failed with exit code: $LastExitCode"}
 
 # Remove all temporary files
-Get-ChildItem -Recurse ./output | Where-Object {(-not ($_ -is [System.IO.DirectoryInfo])) -and $_.Name -ne "yearly.json"} | Remove-Item
+# Get-ChildItem -Recurse ./output | Where-Object {(-not ($_ -is [System.IO.DirectoryInfo])) -and $_.Name -ne "yearly.json"} | Remove-Item

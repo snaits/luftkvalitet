@@ -20,4 +20,9 @@ pip install orjson
 ```
 
 
+## :warning: Spesialtilfeller
+Kristiansand - Hennig Olsen er en stasjon med kun årlige målinger. Den dukker ikke riktig opp fra APIet og er derfor ikke håndtert som del av skriptet. Fila ligger under output, men må manuelt / for hånd redigeres med nye årsverdier.
+
+
+
 

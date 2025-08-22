@@ -23,15 +23,11 @@ def InitializeMetalValues(path):
             MetalValues.append(value)
             
 def AddYearlyMetalValues(path, inputFileName, outputFileName):
-    for directory in path.iterdir():
-        if not directory.is_dir():
-            continue
+    for directory in path.glob('*/'):        
         HandleMunicipalityDir(directory, inputFileName, outputFileName)
 
 def HandleMunicipalityDir(municipalityDir, inputFileName, outputFileName):
-    for stationDir in municipalityDir.iterdir():
-        if stationDir.is_file():
-            continue
+    for stationDir in municipalityDir.glob("*/"):          
         HandleStation(stationDir, inputFileName, outputFileName)
 
 
@@ -42,6 +38,8 @@ def HandleStation(stationPath, inputFileName, outputFileName):
     metalComponents = AggregateUnderComponent(stationMetalValues)
 
     components = GetNonMetalComponents(stationPath, inputFileName)
+    if components is None:
+        return
     components["components"] += metalComponents
 
     print(f"{stationPath} : {len(metalComponents)}")
@@ -88,6 +86,11 @@ def CreateStandardValue(metalValue):
 
 def GetNonMetalComponents(stationPath, inputFileName):
     inputPath = os.path.join(stationPath, inputFileName)
+
+    if not os.path.exists(inputPath):
+        print(f"Input file not found: {inputPath}")
+        return None
+
     with open(inputPath, mode="r", encoding="utf-8") as inputFile:
         components = json.load(inputFile)
     return components
