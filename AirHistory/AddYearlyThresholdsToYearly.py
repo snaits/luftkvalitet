@@ -40,6 +40,10 @@ def HandleStation(stationDir, inputFileName, outputFileName):
     print(f"{stationDir}")
 
     station = GetStation(stationDir, inputFileName)
+
+    if(station is None):
+        return
+    
     components = station["components"]
     for component in components:
         for value in component["values"]:

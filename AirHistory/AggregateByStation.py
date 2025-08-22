@@ -1,5 +1,5 @@
 import argparse
-import json
+import orjson
 import datetime
 import os
 import os.path
@@ -14,7 +14,7 @@ municipalityNumberByName = {}
 def InitializeMunicipalities(path):
     data = {}
     with open(path.absolute(), mode="r", encoding="utf-8") as inputFile:
-        data = json.load(inputFile)
+        data = orjson.loads(inputFile.read())
 
     counties = data["countyList"]
     for county in counties:
@@ -36,7 +36,7 @@ def HandleFile(path):
     print(f"path: {path.absolute()}")
     #with open(path.absolute(), mode="r", encoding="iso-8859-1") as inputFile:
     with open(path.absolute(), mode="r", encoding="utf-8") as inputFile:
-        data = json.load(inputFile)
+        data = orjson.loads(inputFile.read())
 
     for component in data:
         HandleComponent(component)
@@ -118,7 +118,7 @@ def OutputJsonFiles(outputPath, valueType):
             outputFilePath = os.path.join(stationPath, f'{valueType}.json')
             print(stationPath)
             with open(outputFilePath, mode="w", encoding="utf-8") as stationFile:
-                json.dump(stations[stationName], stationFile)
+                stationFile.write(orjson.dumps(stations[stationName]).decode())
 
 argumentParser = argparse.ArgumentParser()
 argumentParser.add_argument("--input", "-i", help="provide the input folder")

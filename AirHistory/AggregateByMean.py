@@ -12,15 +12,11 @@ from AirHistoryUtilities import GetPathFromArgument
 PreviousWeirdComponent = ""
 
 def AggregateByMean(path, outputFileName):
-    for directory in path.iterdir():
-        if not directory.is_dir():
-            continue
+    for directory in path.glob('*/'):
         HandleMunicipalityDir(directory, outputFileName)
 
 def HandleMunicipalityDir(municipalityDir, outputFileName):
-    for stationDir in municipalityDir.iterdir():
-        if stationDir.is_file():
-            continue
+    for stationDir in municipalityDir.glob('*/'):
         HandleStation(stationDir, outputFileName)
 
 def HandleStation(entry, outputFileName):

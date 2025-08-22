@@ -35,6 +35,8 @@ def HandleStation(stationPath, valueType, inputFileName, outputFileName):
 
     components = thresholdStation["components"]
     for component in components:
+        if(component is None or component.get("counts") is None):
+            continue
         yearlyComponent = GetOrCreateComponent(yearlyStation, component)
         for value in component["counts"]:
             print(f"{value}")
