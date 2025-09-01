@@ -27,6 +27,8 @@ def InitializeThresholdList(settingsPath):
     if len(ThresholdsList) == 0:
         raise Exception(f"Threshold file empty: [{thresholdsPath}]")
 
+    print(f"Loaded {len(ThresholdsList)} threshold entries from {thresholdsPath}")
+
 def AddYearlyThresholdValues(path, inputFileName, outputFileName):
     for directory in path.glob('*/'):
         HandleMunicipalityDir(directory, inputFileName, outputFileName)
@@ -49,7 +51,7 @@ def HandleStation(stationDir, inputFileName, outputFileName):
         for value in component["values"]:
             AddThreshold(value, component['component'])
 
-    print(f"{stationDir} : {len(components)}")
+    print(f"{stationDir} {inputFileName} : {len(components)}")
 
     OutputStation(station, stationDir, outputFileName)
 
@@ -64,7 +66,8 @@ def AddThreshold(value, componentName):
 
     thresholds = GetThresholds(componentName, year)
     if thresholds is None:
-        return
+        print(f"No thresholds for {componentName} -- {year}")
+        return 
 
     numericValue = value['value']
     value["aboveLowerThreshold"] = "lower" in thresholds and numericValue > thresholds["lower"]
@@ -72,7 +75,7 @@ def AddThreshold(value, componentName):
     value["aboveBoundary"] = numericValue > thresholds["boundary"]
 
     if value["aboveBoundary"]:
-        print(f"{componentName} -- {year}")
+        print(f"{componentName} aboveBoundary -- {year}")
 
 def GetThresholds(componentName, year):
     for thresholds in ThresholdsList:
@@ -106,6 +109,7 @@ def GetStation(stationPath, inputFileName):
     return station
 
 def OutputStation(station, stationDir, outputFileName):
+    print(f"Outputting to {stationDir} {outputFileName}")
     outputPath = os.path.join(stationDir, outputFileName)
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
         json.dump(station, outputFile)

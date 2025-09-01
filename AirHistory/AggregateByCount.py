@@ -40,7 +40,7 @@ def AggregateByThreshold(path, valueType, thresholds_totals):
 
 def HandleMunicipalityDir(municipalityDir, valueType, thresholds_totals):
     for stationDir in municipalityDir.iterdir():
-        if stationDir.is_file():
+x        if stationDir.is_file():
             continue
         HandleStation(stationDir, valueType, thresholds_totals)
 

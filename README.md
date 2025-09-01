@@ -3,7 +3,7 @@ Fork av groharam/luftkvalitet
 
 ## Forklaring
 
-Settings-filene inneholder de forskjellige lovkravene til hvert år.
+Settings-filene inneholder de forskjellige lovkravene til hvert år. Du må minst utvide "validforyears" med det nye året, av og til legge til nye grenseverdier
 Oppdaterte lovkrav finnes her:
 [https://lovdata.no/forskrift/2004-06-01-931/§7-9](https://lovdata.no/forskrift/2004-06-01-931/§7-9)
 
