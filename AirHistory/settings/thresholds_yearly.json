@@ -5,7 +5,7 @@
     "PM10": {"lower": 20.5, "upper": 28.5, "boundary": 40.5}
     },
     {
-    "ValidForYears": [2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],
+    "ValidForYears": [2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],
     "NO2": {"lower": 26.5, "upper": 32.5, "boundary": 40.5},
     "Lead": {"lower": 0.255, "upper": 0.355, "boundary": 0.55},
     "Benzene": {"lower": 2.05, "upper": 3.55, "boundary": 5.5},
@@ -20,7 +20,7 @@
     "PM2.5": {"lower": 10.5, "upper": 12.5, "boundary": 15.5}
     },
 	{
-    "ValidForYears": [2022],
+    "ValidForYears": [2022, 2023, 2024],
     "PM10": {"lower": 15.5, "upper": 17.5, "boundary": 20.5},
     "PM2.5": {"lower": 5.5, "upper": 7.5, "boundary": 10.5}
     }

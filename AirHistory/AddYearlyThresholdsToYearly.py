@@ -27,16 +27,14 @@ def InitializeThresholdList(settingsPath):
     if len(ThresholdsList) == 0:
         raise Exception(f"Threshold file empty: [{thresholdsPath}]")
 
+    print(f"Loaded {len(ThresholdsList)} threshold entries from {thresholdsPath}")
+
 def AddYearlyThresholdValues(path, inputFileName, outputFileName):
-    for directory in path.iterdir():
-        if not directory.is_dir():
-            continue
+    for directory in path.glob('*/'):
         HandleMunicipalityDir(directory, inputFileName, outputFileName)
 
 def HandleMunicipalityDir(municipalityDir, inputFileName, outputFileName):
-    for stationDir in municipalityDir.iterdir():
-        if stationDir.is_file():
-            continue
+    for stationDir in municipalityDir.glob("*/"):        
         HandleStation(stationDir, inputFileName, outputFileName)
 
 
@@ -44,12 +42,16 @@ def HandleStation(stationDir, inputFileName, outputFileName):
     print(f"{stationDir}")
 
     station = GetStation(stationDir, inputFileName)
+
+    if(station is None):
+        return
+    
     components = station["components"]
     for component in components:
         for value in component["values"]:
             AddThreshold(value, component['component'])
 
-    print(f"{stationDir} : {len(components)}")
+    print(f"{stationDir} {inputFileName} : {len(components)}")
 
     OutputStation(station, stationDir, outputFileName)
 
@@ -64,7 +66,8 @@ def AddThreshold(value, componentName):
 
     thresholds = GetThresholds(componentName, year)
     if thresholds is None:
-        return
+        print(f"No thresholds for {componentName} -- {year}")
+        return 
 
     numericValue = value['value']
     value["aboveLowerThreshold"] = "lower" in thresholds and numericValue > thresholds["lower"]
@@ -72,7 +75,7 @@ def AddThreshold(value, componentName):
     value["aboveBoundary"] = numericValue > thresholds["boundary"]
 
     if value["aboveBoundary"]:
-        print(f"{componentName} -- {year}")
+        print(f"{componentName} aboveBoundary -- {year}")
 
 def GetThresholds(componentName, year):
     for thresholds in ThresholdsList:
@@ -93,12 +96,20 @@ def CheckValidity(value):
 
 
 def GetStation(stationPath, inputFileName):
+
+    print(f"{stationPath}")
     inputPath = os.path.join(stationPath, inputFileName)
+
+    if not os.path.exists(inputPath):
+        print(f"not found path: {inputPath}")
+        return None
+
     with open(inputPath, mode="r", encoding="utf-8") as inputFile:
         station = json.load(inputFile)
     return station
 
 def OutputStation(station, stationDir, outputFileName):
+    print(f"Outputting to {stationDir} {outputFileName}")
     outputPath = os.path.join(stationDir, outputFileName)
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
         json.dump(station, outputFile)

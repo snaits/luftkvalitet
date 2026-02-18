@@ -1,5 +1,5 @@
 import argparse
-import json
+import orjson
 import datetime
 import os
 import os.path
@@ -12,26 +12,26 @@ from AirHistoryUtilities import GetPathFromArgument
 PreviousWeirdComponent = ""
 
 def AggregateByMean(path, outputFileName):
-    for directory in path.iterdir():
-        if not directory.is_dir():
-            continue
+    for directory in path.glob('*/'):
         HandleMunicipalityDir(directory, outputFileName)
 
 def HandleMunicipalityDir(municipalityDir, outputFileName):
-    for stationDir in municipalityDir.iterdir():
-        if stationDir.is_file():
-            continue
+    for stationDir in municipalityDir.glob('*/'):
         HandleStation(stationDir, outputFileName)
 
 def HandleStation(entry, outputFileName):
     valuePath = os.path.join(entry, "hourly_deduped.json")
     outputPath = os.path.join(entry, outputFileName)
     countStation = {}
+    
+    if("Hennig Olsen" in entry.name or "Holta øst" in entry.name):
+        print("Skipping hourly data for ", entry.name)
+        return None
 
     print(outputPath)
     startTime = time()
     with open(valuePath, mode="r", encoding="utf-8") as inputFile:
-        valStation = json.load(inputFile)
+        valStation = orjson.loads(inputFile.read())
         countStation = valStation.copy()
         countStation['components'] = []
         for component in valStation['components']:
@@ -42,7 +42,7 @@ def HandleStation(entry, outputFileName):
     print(timedelta(seconds=duration).total_seconds())
 
     with open(outputPath, mode="w", encoding="utf-8") as outputFile:
-        json.dump(countStation, outputFile)
+        outputFile.write(orjson.dumps(countStation).decode())
 
 def HandleComponent(component):
     componentName = component["component"]

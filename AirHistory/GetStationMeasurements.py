@@ -1,5 +1,4 @@
 import argparse
-import json
 import requests
 import datetime
 import os
@@ -30,7 +29,10 @@ def GetMeasurements(startDate, dirPath, isHourly):
     if not os.path.exists(dirPath):
         os.mkdir(dirPath)
 
-    while startDate < datetime.datetime(2023,1,1):
+    session = requests.Session()
+    # session.headers.update({"User-Agent": "AirHistoryFetcher/1.0"})
+
+    while startDate < datetime.datetime(2025,1,1):  #don't fetch data newer than this 
         endDate = startDate + month
 
         url = f'https://api.nilu.no/{urlPath}/{startDate.strftime(dateFormat)}/{endDate.strftime(dateFormat)}/all'
@@ -45,7 +47,7 @@ def GetMeasurements(startDate, dirPath, isHourly):
 
         print(f'Downloading [{url}] to [{filePath}].')
 
-        response = requests.get(url)
+        response = session.get(url)
         response.raise_for_status()
         contents = response.text
 
